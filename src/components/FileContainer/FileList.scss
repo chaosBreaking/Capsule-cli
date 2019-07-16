@@ -47,5 +47,14 @@
     }
 }
 .listItem:nth-child(even) {
-    background: #eeeeee;
+    // background: #eeeeee;
+}
+.dragMusk {
+    position: absolute;
+    background-color: rgb(162, 162, 162);
+    opacity:0.3;
+    border:1px dashed #d9d9d9;
+}
+.active {
+    background: #eee;
 }
