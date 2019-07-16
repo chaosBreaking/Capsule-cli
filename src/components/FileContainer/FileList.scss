@@ -1,0 +1,42 @@
+.listContainer {
+    display: flex;
+    flex-direction: column;
+}
+.topBar {
+    display: flex;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-bottom: 1px solid;
+    .header {
+        flex: 1 0 auto;
+        width: 1rem;
+        font-size: 1.5rem;
+        text-align: left;
+        margin-right: 1rem;
+    }
+}
+.listBody {
+    display: flex;
+    flex-direction: column;
+}
+.listItem {
+    padding: 1rem;
+    display: inline-flex;
+    .itemProperty {
+        flex: 1 0 auto;
+        display: inline-block;
+        width: 1rem;
+        margin-right: 1rem;
+        white-space: nowrap;
+        text-align: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        word-break: break-all;
+    }
+}
+.listItem:nth-child(even) {
+    background: #eeeeee;
+}
