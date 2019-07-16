@@ -1,7 +1,7 @@
-import { observable } from "mobx";
+import { observable, action } from "mobx";
 
 class AppStore {
-    @observable containerType = 'list' // 'card' || 'list'
+    @observable containerType = 'card' // 'card' || 'list'
     constructor(props = {}) {
         this.mounted = false
         this.fileStack = []
@@ -185,6 +185,10 @@ class AppStore {
                 updatedAt: new Date().toDateString()
             },
         ]
+    }
+    @action.bound
+    change() {
+        this.containerType = this.containerType === 'list' ? 'card' : 'list'
     }
 
 }

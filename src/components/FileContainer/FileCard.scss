@@ -1,0 +1,53 @@
+.cardContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    background: rgba(196, 196, 196, 0.2);
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;
+    // background: #eee;
+}
+.card {
+    background: #fff;
+    border-radius: 0.5rem;
+    flex: 0 1 auto;
+    margin: 1rem 1rem 0 1rem;
+    padding: 1rem 1rem 0 1rem;
+    width: 10rem;
+    height: 10rem;
+    max-width: 10rem;
+    min-width: 10rem;
+    max-height: 10rem;
+    min-height: 10rem;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    -ms-border-radius: 0.5rem;
+    -o-border-radius: 0.5rem;
+    cursor: pointer;
+}
+.card:hover {
+    background: rgba(196, 196, 196, 0.2);
+}
+.info {
+    padding-top: 1rem;
+    .itemProperty {
+        display: block;
+        font-size: 1rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        white-space: nowrap;
+        max-width: 10rem;
+        min-width: 10rem;
+    }
+}
+.spacer {
+    margin-top: 1rem;
+}
+.dragMusk {
+    position: absolute;
+    background-color: rgb(162, 162, 162);
+    opacity:0.3;
+    border:1px dashed #d9d9d9;
+}
