@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import './FileCard.scss'
 import img from "../../file.png"
 import DragSelect from './DragSelect'
+import ContextMenu from './ContextMenu';
+
 class CardItem extends Component {
     constructor(props = {}) {
         super(props)
@@ -26,6 +28,9 @@ class FileCard extends DragSelect {
         super(props)
         this.debounceBarX = 200
         this.debounceBarY = 200
+        this.on('mouseDown', e => {
+            this.menu && this.menu.clearMenu()
+        })
     }
     caculateSelected() {
         const { top: borderTop, bottom: borderBottom, left: borderLeft, right: borderRight } = this.target.getBoundingClientRect()
@@ -53,6 +58,14 @@ class FileCard extends DragSelect {
         })
         this.selectedArr = []
     }
+    onRef(ref) {
+        this.menu = ref
+    }
+    contextMenuHandler(e) {
+        e.stopPropagation()
+        e.preventDefault()
+        this.menu.activateMenu({x: this.startX, y: this.startY})
+    }
     render() {
         const cardItem = this.props.files.map((file, index) => {
             return <CardItem key={ index } file={ file } index={ index }></CardItem>
@@ -63,9 +76,11 @@ class FileCard extends DragSelect {
                 onMouseMove = { e => this.onMouseMove(e) }
                 onMouseUp = { e => this.onMouseUp(e) }
                 onMouseLeave = { e => this.onMouseLeave(e) }
+                onContextMenu = { e => this.contextMenuHandler(e) }
             >
+                <ContextMenu onRef = { (ref)=>this.onRef(ref) }></ContextMenu>
                 <div className="dragMusk" id="dragMusk"></div>
-                { cardItem }
+                    { cardItem }
             </div>
         )
     }

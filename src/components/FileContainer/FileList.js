@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { HEADER } from './Constant';
 import './FileList.scss'
 import DragSelect from './DragSelect'
+import ContextMenu from './ContextMenu';
 
-class TopBar extends Component {
+class Header extends Component {
     constructor(props = {}) {
         super(props)
     }
@@ -37,6 +38,13 @@ class FileList extends DragSelect {
         super(props)
         this.debounceBarX = 40
         this.debounceBarY = 40
+        this.mousePosition = {
+            x: '',
+            y: ''
+        }
+        this.on('mouseDown', e => {
+            this.menu && this.menu.clearMenu()
+        })
     }
     caculateSelected() {
         const { top: borderTop, bottom: borderBottom } = this.target.getBoundingClientRect()
@@ -60,6 +68,14 @@ class FileList extends DragSelect {
         })
         this.selectedArr = []
     }
+    onRef(ref) {
+        this.menu = ref
+    }
+    contextMenuHandler(e) {
+        e.stopPropagation()
+        e.preventDefault()
+        this.menu.activateMenu({ x: this.startX, y: this.startY })
+    }
     render() {
         const listItem = this.props.files.map((file, index) => {
             return <ListItem key={index} file={file} index={index}></ListItem>
@@ -70,9 +86,11 @@ class FileList extends DragSelect {
                 onMouseMove = { e => this.onMouseMove(e) }
                 onMouseUp = { e => this.onMouseUp(e) }
                 onMouseLeave = { e => this.onMouseLeave(e) }
+                onContextMenu = { e => this.contextMenuHandler(e) }
             >
+                <ContextMenu onRef = { (ref)=>this.onRef(ref) }></ContextMenu>
                 <div className="dragMusk" id="dragMusk"></div>
-                <TopBar></TopBar>
+                <Header></Header>
                 <div className="listBody" id="listBody">
                     { listItem }
                 </div>

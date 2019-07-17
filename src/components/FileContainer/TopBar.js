@@ -18,7 +18,7 @@ class TopBar extends Component {
                 <div className="topBarMiddle expandSelf">
                 </div>
                 <div className="topBarRight shrinkSelf">
-                    <i onClick={ e => { appState.change() } } className="iconfont icon-sortitem alignEnd block"></i>
+                    <i onClick={ e => {  } } className="iconfont icon-sortitem alignEnd block"></i>
                     <i onClick={ e => { appState.change() } } className="iconfont icon-apps1 alignEnd block"></i>
                 </div>
             </div>

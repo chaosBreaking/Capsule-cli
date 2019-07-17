@@ -1,4 +1,7 @@
 import { Component } from 'react'
+import { EventEmitter } from 'events';
+import { inherits } from 'util';
+
 class DragSelect extends Component {
     constructor(props = {}) {
         super(props)
@@ -9,6 +12,11 @@ class DragSelect extends Component {
         this.debounceBarX = 10
         this.debounceBarY = 10
         this.selectedArr = []
+        // inherit EventEmitter
+        const eventProto = new EventEmitter()
+        for(let property in eventProto) {
+            this[property] = eventProto[property]
+        }
     }
     caculateSelected() {
     }
@@ -23,16 +31,18 @@ class DragSelect extends Component {
         this.target && (this.target.style.right = 0)
     }
     onMouseDown (e) {
+        this.emit('mouseDown', e)
         this.clearSelected()
         this.clearDrag()
         this.dragFlag = true
-        this.target = document.getElementById('dragMusk')
         this.startX = e.pageX
         this.startY = e.pageY
+        this.target = document.getElementById('dragMusk')
         e.stopPropagation()
         e.preventDefault()
     }
     onMouseMove (e) {
+        this.emit('mouseMove', e)
         if (!this.dragFlag) return null
         if (!this.target) return null
         this.target.top = this.startY + 'px'
@@ -59,6 +69,7 @@ class DragSelect extends Component {
         e.preventDefault()
     }
     onMouseUp(e) {
+        this.emit('mouseUp', e)
         this.dragFlag = false
         if(Math.abs(e.pageX - this.startX) < this.debounceBarX && Math.abs(e.pageY - this.startY) < this.debounceBarY) {
             this.clearDrag()
@@ -70,6 +81,7 @@ class DragSelect extends Component {
         e.preventDefault()
     }
     onMouseLeave(e) {
+        this.emit('mouseLeave', e)
         this.dragFlag = false
         this.clearDrag()
         e.stopPropagation()

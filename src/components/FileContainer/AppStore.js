@@ -1,7 +1,7 @@
 import { observable, action } from "mobx";
 
 class AppStore {
-    @observable containerType = 'list' // 'card' || 'list'
+    @observable containerType = 'card' // 'card' || 'list'
     constructor(props = {}) {
         this.mounted = false
         this.fileStack = []
