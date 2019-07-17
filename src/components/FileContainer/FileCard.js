@@ -3,6 +3,7 @@ import './FileCard.scss'
 import img from "../../file.png"
 import DragSelect from './DragSelect'
 import ContextMenu from './ContextMenu';
+import { Grow } from '@material-ui/core';
 
 class CardItem extends Component {
     constructor(props = {}) {
@@ -10,16 +11,18 @@ class CardItem extends Component {
     }
     render() {
         return (
-            <div className="card" index={this.props.index}>
-                <div className="image">
-                    <img src={img} alt="cat" width={'100rem'}></img>
+            <Grow in={true} style={{ transformOrigin: '0 0 0' }} timeout={300}>
+                <div className="card" index={this.props.index}>
+                    <div className="image">
+                        <img src={img} alt="cat" width={'100rem'}></img>
+                    </div>
+                    <div className="info">
+                        <span className="itemProperty">
+                            {this.props.file.name}
+                        </span>
+                    </div>
                 </div>
-                <div className="info">
-                    <span className="itemProperty">
-                        {this.props.file.name}
-                    </span>
-                </div>
-            </div>
+            </Grow>
         )
     }
 }

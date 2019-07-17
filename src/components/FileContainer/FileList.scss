@@ -32,30 +32,30 @@
     overflow: auto;
     background: rgba(210, 210, 210, 0.1);
     padding-top: 0.5rem;
-}
-.listItem {
-    padding: 1rem;
-    display: inline-flex;
-    cursor: pointer;
-    .itemProperty {
-        flex: 1 0 auto;
-        display: inline-block;
-        width: 1rem;
-        margin-right: 1rem;
-        white-space: nowrap;
-        text-align: left;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        word-wrap: break-word;
-        word-break: break-all;
+    .listItem {
+        padding: 1rem;
+        display: inline-flex;
+        cursor: pointer;
+        .itemProperty {
+            flex: 1 0 auto;
+            display: inline-block;
+            width: 1rem;
+            margin-right: 1rem;
+            white-space: nowrap;
+            text-align: left;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-wrap: break-word;
+            word-break: break-all;
+        }
     }
 }
-.listItem:nth-child(even) {
-    // background: #eeeeee;
-}
-.listItem:hover {
+.listBody .listItem:hover {
     background: #eee;
 }
+.Dragging .listItem:hover {
+    background: none;
+} 
 .dragMusk {
     position: absolute;
     background-color: rgb(162, 162, 162);

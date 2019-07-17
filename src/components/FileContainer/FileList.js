@@ -3,6 +3,7 @@ import { HEADER } from './Constant';
 import './FileList.scss'
 import DragSelect from './DragSelect'
 import ContextMenu from './ContextMenu';
+import { Grow } from '@material-ui/core';
 
 class Header extends Component {
     constructor(props = {}) {
@@ -26,10 +27,12 @@ class ListItem extends Component {
             return <span className="itemProperty" key={index}>{value}</span>
         })
         return (
+            <Grow in={true} style={{ transformOrigin: '0 0 0' }} timeout={300}>
             <div className="listItem" index={this.props.index}>
                 {item}
                 <br></br>
             </div>
+            </Grow>
         )
     }
 }
@@ -44,6 +47,12 @@ class FileList extends DragSelect {
         }
         this.on('mouseDown', e => {
             this.menu && this.menu.clearMenu()
+            const lb = document.getElementById('listBody')
+            lb.className = 'listBody Dragging'
+        })
+        this.on('mouseUp', e => {
+            const lb = document.getElementById('listBody')
+            lb.className = 'listBody'
         })
     }
     caculateSelected() {
