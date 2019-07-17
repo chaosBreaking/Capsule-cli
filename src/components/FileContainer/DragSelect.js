@@ -70,6 +70,7 @@ class DragSelect extends Component {
         e.preventDefault()
     }
     onMouseLeave(e) {
+        this.dragFlag = false
         this.clearDrag()
         e.stopPropagation()
         e.preventDefault()
