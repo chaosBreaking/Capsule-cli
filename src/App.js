@@ -4,8 +4,9 @@ import { Provider, observer } from 'mobx-react'
 import { observable, action } from 'mobx';
 import FileContainer from './components/FileContainer';
 import { Loading } from './components/Utilities/Loading';
-import node from './service/ipfs'
+// import node from './service/ipfs'
 import eventBus from './components/EventBus'
+
 class Store {
     @observable Theme = 'light'
     constructor(props = {}) {

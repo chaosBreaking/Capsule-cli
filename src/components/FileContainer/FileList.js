@@ -10,7 +10,7 @@ class TopBar extends Component {
     render() {
         return (
             <div className="topBar">
-                {HEADER.map(name => <span className="header" key={HEADER.indexOf(name)}>{name}</span>)}
+                {HEADER.map(name => <div className="header" key={HEADER.indexOf(name)}>{name}</div>)}
             </div>
         )
     }

@@ -4,6 +4,7 @@ import { appState } from './AppStore';
 import FileCard from './FileCard';
 import FileList from './FileList';
 import './index.scss'
+import TopBar from './TopBar';
 
 @inject('store')
 @observer
@@ -14,7 +15,7 @@ class FileContainer extends Component {
     render() {
         return (
             <div className="container">
-                <button onClick={e => {appState.change()}}>change</button>
+                <TopBar></TopBar>
                 { appState.containerType === 'card' && <FileCard files={appState.fileStack}></FileCard> }
                 { appState.containerType === 'list' && <FileList files={appState.fileStack}></FileList> }
             </div>
