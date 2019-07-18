@@ -24,14 +24,14 @@ class ListItem extends Component {
     render() {
         const item = HEADER.map((headerName, index) => {
             const value = this.props.file[headerName]
-            return <span className="itemProperty" key={index}>{value}</span>
+            return <span className="itemProperty" index={index}>{value}</span>
         })
         return (
             <Grow in={true} style={{ transformOrigin: '0 0 0' }} timeout={300}>
-            <div className="listItem" index={this.props.index}>
-                {item}
-                <br></br>
-            </div>
+                <div className="listItem" index={this.props.index}>
+                    {item}
+                    <br></br>
+                </div>
             </Grow>
         )
     }
@@ -85,6 +85,11 @@ class FileList extends DragSelect {
         e.preventDefault()
         this.menu.activateMenu({ x: this.startX, y: this.startY })
     }
+    clickHandler(e) {
+        console.log(e.target)
+        e.preventDefault()
+        e.stopPropagation()
+    }
     render() {
         const listItem = this.props.files.map((file, index) => {
             return <ListItem key={index} file={file} index={index}></ListItem>
@@ -100,7 +105,7 @@ class FileList extends DragSelect {
                 <ContextMenu onRef = { (ref)=>this.onRef(ref) }></ContextMenu>
                 <div className="dragMusk" id="dragMusk"></div>
                 <Header></Header>
-                <div className="listBody" id="listBody">
+                <div className="listBody" id="listBody" onClick={ e => this.clickHandler(e) }>
                     { listItem }
                 </div>
             </div>
