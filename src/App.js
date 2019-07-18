@@ -6,6 +6,7 @@ import FileContainer from './components/FileContainer';
 import { Loading } from './components/Utilities/Loading';
 // import node from './service/ipfs'
 import eventBus from './components/EventBus'
+import ProgressBar from './components/ProgressBar/ProgressBar';
 
 class Store {
     @observable Theme = 'light'
@@ -24,8 +25,9 @@ function App() {
     return (
         <Provider store={store}>
             <div className="App">
-                <FileContainer></FileContainer>
-                <Loading></Loading>
+                <ProgressBar to={95} color={'red'} height={0.5}></ProgressBar>
+                {/* <FileContainer></FileContainer>
+                <Loading></Loading> */}
             </div>
         </Provider>
     );
