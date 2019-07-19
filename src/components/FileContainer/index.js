@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { appState } from './AppStore';
-import FileCard from './FileCard';
-import FileList from './FileList';
+import FileCard from './widgets/FileCard';
+import FileList from './widgets/FileList';
 import './index.scss'
-import TopBar from './TopBar';
+import TopBar from './widgets/TopBar';
 
 @inject('store')
 @observer

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { appState } from './AppStore';
+import { appState } from '../AppStore';
 import { inject, observer } from "mobx-react";
 import './TopBar.scss'
 

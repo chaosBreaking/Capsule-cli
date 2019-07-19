@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { HEADER } from './Constant';
+import { HEADER } from '../Constant';
 import './FileList.scss'
 import DragSelect from './DragSelect'
 import ContextMenu from './ContextMenu';

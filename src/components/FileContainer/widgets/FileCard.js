@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './FileCard.scss'
-import img from "../../file.png"
+import img from "../images/file.png"
 import DragSelect from './DragSelect'
 import ContextMenu from './ContextMenu';
 import { Grow } from '@material-ui/core';
