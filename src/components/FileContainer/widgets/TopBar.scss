@@ -17,6 +17,9 @@
     flex-direction: row;
     justify-self: flex-end;
     padding: 0 1rem 0 1rem;
+    & i:active {
+        transform: scale(0.8)
+    }
 }
 .alignStart {
     justify-self: flex-start;

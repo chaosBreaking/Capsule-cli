@@ -24,7 +24,7 @@ class ListItem extends Component {
     render() {
         const item = HEADER.map((headerName, index) => {
             const value = this.props.file[headerName]
-            return <span className="itemProperty" index={index}>{value}</span>
+            return <span className="itemProperty" key={index} index={index}>{value}</span>
         })
         return (
             <Grow in={true} style={{ transformOrigin: '0 0 0' }} timeout={300}>
@@ -48,10 +48,12 @@ class FileList extends DragSelect {
         this.on('mouseDown', e => {
             this.menu && this.menu.clearMenu()
             const lb = document.getElementById('listBody')
-            lb.className = 'listBody Dragging'
+            // 拖拽时样式，不出现hover时子项目的背景阴影
+            lb.className = 'listBody selecting'
         })
         this.on('mouseUp', e => {
             const lb = document.getElementById('listBody')
+            // 恢复非选择时样式
             lb.className = 'listBody'
         })
     }
