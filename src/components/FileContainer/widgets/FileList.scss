@@ -13,13 +13,17 @@
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;
     .header {
         cursor: pointer;
-        padding: 1rem 0 1rem 1rem;
+        // padding: 1rem 0 1rem 1rem;
+        align-items: center;
         flex: 1 0 auto;
         width: 1rem;
         font-size: 1.5rem;
         text-align: left;
-        margin-right: 1rem;
+        // margin-right: 1rem;
         background: #fff;
+        &:first-child {
+            padding: 0 0 0 1rem;
+        }
     }
     .header:hover {
         background: #eee;

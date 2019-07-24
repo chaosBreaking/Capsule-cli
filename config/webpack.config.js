@@ -468,6 +468,19 @@ module.exports = function(webpackEnv) {
                 name: 'static/media/[name].[hash:8].[ext]',
               },
             },
+            {
+              test: /\.css$/,
+              use: [
+                'isomorphic-style-loader',
+                {
+                  loader: 'css-loader',
+                  options: {
+                    importLoaders: 1
+                  }
+                },
+                'postcss-loader'
+              ]
+            }
             // ** STOP ** Are you adding a new loader?
             // Make sure to add the new loader(s) before the "file" loader.
           ],

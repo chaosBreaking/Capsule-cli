@@ -1,6 +1,5 @@
 import { Component } from 'react'
 import { EventEmitter } from 'events';
-import { inherits } from 'util';
 
 class DragSelect extends Component {
     constructor(props = {}) {

@@ -9,6 +9,7 @@ class NavItem extends Component {
     render() {
         return (
             <div className='navItem'>
+                <p className="itemLeftBorder"></p>
                 <i className={ 'iconfont ' + this.props.icon } id={this.props.id} key={this.props.id}></i>
             </div>
         )
@@ -20,10 +21,10 @@ class SideNav extends Component {
     }
     render() {
         const { top, bottom } = sideNavItem
-        const topItem = top.map(obj => {
-            return <NavItem {...obj}></NavItem>
+        const topItem = top.map((obj, index) => {
+            return <NavItem key={ index } {...obj}></NavItem>
         })
-        const bottomItem = bottom.map(obj => <NavItem {...obj}></NavItem>)
+        const bottomItem = bottom.map((obj, index) => <NavItem {...obj} key={ index }></NavItem>)
         return (
             <div className="sideNavContainer">
                 <div className="topPart">

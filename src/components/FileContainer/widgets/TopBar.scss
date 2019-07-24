@@ -1,3 +1,4 @@
+$fontSize: 1.7rem;
 .topBarContainer {
     display: flex;
     flex-direction: row;
@@ -10,16 +11,26 @@
     display: flex;
     flex-direction: row;
     justify-self: flex-start;
+    align-items: center;
     padding: 0 1rem 0 1rem;
+    height: 100%;
 }
 .topBarRight {
+    height: 100%;
     display: flex;
     flex-direction: row;
     justify-self: flex-end;
+    align-items: center;
     padding: 0 1rem 0 1rem;
     & i:active {
-        transform: scale(0.8)
+        transform: scale(.9);
     }
+    & i:hover {
+        opacity: .5;
+    }
+}
+.fullHeight {
+    height: 100%;
 }
 .alignStart {
     justify-self: flex-start;
@@ -38,4 +49,54 @@
 }
 .iconfont {
     padding: 0 0.5rem 0 .5rem;
+}
+.border {
+    border: 1px;
+}
+.pointer {
+    cursor: pointer;
+}
+.searchBar {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    input {
+        height: 100%;
+        visibility: hidden;
+        padding: 0 10px 0 3rem;
+        align-self: center;
+        margin: 0;
+        height: 80%;
+        width: 100%;
+        position: relative;
+        border: 0;
+        -webkit-appearance:none;
+        -moz-appearance: none;
+        border-radius: 1rem;
+        outline: 0;
+        border: 1px solid;
+        border-color: #868686;
+        color: #868686;
+        &::-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: #868686;
+        }
+        &::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: #868686;
+        }
+        &::-webkit-input-placeholder{
+            color: #868686;
+        }
+        transition: width .6s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    #searchIcon {
+        cursor: pointer;
+        position: absolute;
+        left: 1rem;
+        z-index: 999;
+        font-size: $fontSize;
+    }
+}
+
+.iconfont {
+    font-size: $fontSize;
 }
