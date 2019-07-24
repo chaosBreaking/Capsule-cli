@@ -1,0 +1,23 @@
+.sideNavContainer {
+    display: flex;
+    flex-direction: column;
+    width: 4rem;
+    background: #424242;
+    color: #eee;
+}
+.topPart {
+    flex: 1 0 auto;
+    align-self: flex-start;
+}
+.bottomPart {
+    align-self: flex-end;
+}
+
+.navItem {
+    flex: 0 1 auto;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

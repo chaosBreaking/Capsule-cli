@@ -6,6 +6,9 @@ import FileContainer from './components/FileContainer';
 import { Loading } from './components/Utilities/Loading';
 // import node from './service/ipfs'
 import eventBus from './components/EventBus'
+import SideNav from './components/SideNav';
+import TopNav from './components/TopNav';
+import { Toolbar } from '@material-ui/core';
 
 class Store {
     @observable Theme = 'light'
@@ -24,8 +27,17 @@ function App() {
     return (
         <Provider store={store}>
             <div className="App">
-                <FileContainer></FileContainer>
-                <Loading></Loading>
+                <div className="header">
+                    <TopNav></TopNav>
+                </div>
+                <div className="main">
+                    <SideNav></SideNav>
+                    
+                    <FileContainer></FileContainer>
+                </div>
+                <div className="footer">
+
+                </div>
             </div>
         </Provider>
     );
