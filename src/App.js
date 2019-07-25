@@ -16,7 +16,7 @@ function App() {
     let rootStore = new BaseStore()
     return (
         <Provider store={rootStore}>
-            <div className="App" onClick={e => {rootStore.EventBus.emit('GlobalClick')}}>
+            <div className="App" onClick={e => {rootStore.EventBus.emit('GlobalClick', e)}}>
                 <div className="header">
                     <HeaderBar></HeaderBar>
                 </div>
