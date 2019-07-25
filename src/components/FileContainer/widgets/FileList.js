@@ -12,7 +12,7 @@ class Header extends Component {
     render() {
         return (
             <div className="topBar">
-                {HEADER.map(name => <div className="header" key={HEADER.indexOf(name)}>{name}</div>)}
+                {HEADER.map(name => <div className="listHeader" key={HEADER.indexOf(name)}>{name}</div>)}
             </div>
         )
     }
@@ -106,7 +106,7 @@ class FileList extends DragSelect {
             >
                 <ContextMenu onRef = { (ref)=>this.onRef(ref) }></ContextMenu>
                 <div className="dragMusk" id="dragMusk"></div>
-                <Header></Header>
+                {/* <Header></Header> */}
                 <div className="listBody" id="listBody" onClick={ e => this.clickHandler(e) }>
                     { listItem }
                 </div>

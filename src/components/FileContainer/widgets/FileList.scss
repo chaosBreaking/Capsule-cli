@@ -9,9 +9,10 @@
     position: relative;
     display: flex;
     border-bottom: 1px solid;
+    border-top: 1px solid;
     padding-right: 1rem;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;
-    .header {
+    .listHeader {
         cursor: pointer;
         // padding: 1rem 0 1rem 1rem;
         align-items: center;
@@ -25,7 +26,7 @@
             padding: 0 0 0 1rem;
         }
     }
-    .header:hover {
+    .listHeader:hover {
         background: #eee;
     }
 }
@@ -39,7 +40,7 @@
     flex: 1 0 auto;
     position: relative;
     height: 100%;
-    overflow: auto;
+    overflow: scroll;
     .listItem {
         padding: 1rem;
         display: inline-flex;
@@ -60,6 +61,21 @@
 }
 .listBody .listItem:hover {
     background: #eee;
+}
+.listBody::-webkit-scrollbar {
+    width: .5rem;
+  }
+.listBody::-webkit-scrollbar-thumb {
+/*滑块*/
+    border-radius: 10px;
+    background: #868686;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+}
+.listBody::-webkit-scrollbar-track {
+/*轨道*/
+    border-radius: 10px;
+    background: #EDEDED;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0);
 }
 .selecting .listItem:hover {
     background: none;
