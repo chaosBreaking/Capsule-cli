@@ -2,9 +2,42 @@ import React, { Component } from 'react'
 import './FileCard.scss'
 import img from "../images/file.png"
 import DragSelect from './DragSelect'
-import ContextMenu from './ContextMenu';
+import ContextMenu, { createMenu } from './ContextMenu';
 import { Grow } from '@material-ui/core';
-
+const cardMenu = createMenu([
+    {
+        name: '打开'
+    },
+    {
+        name: '复制'
+    },
+    {
+        name: '移动到'
+    },
+    {
+        name: '分享'
+    },
+    {
+        name: '重命名'
+    },
+    {
+        name: '删除'
+    },
+    {
+        name: '属性'
+    },
+])
+const defaultMenu = createMenu([
+    {
+        name: '上传文件'
+    },
+    {
+        name: '新建文件夹'
+    },
+    {
+        name: '属性'
+    },
+])
 class CardItem extends Component {
     constructor(props = {}) {
         super(props)
@@ -12,7 +45,8 @@ class CardItem extends Component {
     render() {
         return (
             <Grow in={true} style={{ transformOrigin: '0 0 0' }} timeout={300}>
-                <div className="card" index={this.props.index}>
+                <div className="card" index={this.props.index} id="cardItem">
+                    <div className='cardMusk' id='cardMusk'></div>
                     <div className="image">
                         <img src={img} alt="cat" width={'100rem'}></img>
                     </div>
@@ -31,6 +65,7 @@ class FileCard extends DragSelect {
         super(props)
         this.debounceBarX = 200
         this.debounceBarY = 200
+        this.menu = []
         this.on('mouseDown', e => {
             this.menu && this.menu.clearMenu()
         })
@@ -67,7 +102,13 @@ class FileCard extends DragSelect {
     contextMenuHandler(e) {
         e.stopPropagation()
         e.preventDefault()
-        this.menu.activateMenu({x: this.startX, y: this.startY})
+        let option = {}
+        if (e.target.id && e.target.id === 'cardMusk') {
+            option = { menu: cardMenu }
+        } else {
+            option = { menu: defaultMenu }
+        }
+        this.menu.activateMenu({x: this.startX, y: this.startY, default: false, option})
     }
     render() {
         const cardItem = this.props.files.map((file, index) => {
@@ -81,7 +122,7 @@ class FileCard extends DragSelect {
                 onMouseLeave = { e => this.onMouseLeave(e) }
                 onContextMenu = { e => this.contextMenuHandler(e) }
             >
-                <ContextMenu onRef = { (ref)=>this.onRef(ref) }></ContextMenu>
+                <ContextMenu onRef = { ref=>this.onRef(ref) }></ContextMenu>
                 <div className="dragMusk" id="dragMusk"></div>
                     { cardItem }
             </div>

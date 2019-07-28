@@ -16,7 +16,7 @@ class SearchBar extends Component {
                 color: ''
             }
         }
-        this.props.store.EventBus.on('GlobalClick', (e) => {
+        this.props.store.EventBus.on('GLBClick', (e) => {
             if(this.state.expanded && e.target.id !== 'topBarInput') {
                 this.clearStatus(e)
             }

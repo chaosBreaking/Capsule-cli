@@ -16,7 +16,9 @@ function App() {
     let rootStore = new BaseStore()
     return (
         <Provider store={rootStore}>
-            <div className="App" onClick={e => {rootStore.EventBus.emit('GlobalClick', e)}}>
+            <div className="App"
+                onClick={e => rootStore.EventBus.emit('GLBClick', e)}
+                onContextMenu={e => rootStore.EventBus.emit('GLBContextMenu')}>
                 <div className="header">
                     <HeaderBar></HeaderBar>
                 </div>

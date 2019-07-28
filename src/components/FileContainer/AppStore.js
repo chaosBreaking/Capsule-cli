@@ -12,7 +12,7 @@ class AppStore extends BaseStore {
     initFileStore () {
         this.fileStack = [
             {
-                name: '1988我想和这个世界谈谈',
+                name: 'DC2202',
                 size: '10kb',
                 type: 'pdf',
                 createdAt: new Date().toDateString(),
