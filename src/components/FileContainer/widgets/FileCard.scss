@@ -54,6 +54,7 @@
     width: 100%;
     top: 0;
     left: 0;
+    z-index: 996;
 }
 .info {
     padding-top: 1rem;
@@ -77,4 +78,5 @@
     opacity:0.3;
     border:1px dashed #d9d9d9;
     pointer-events: none;
+    z-index: 11116;
 }

@@ -1,5 +1,6 @@
-import React, { Component } from './node_modules/react'
+import React, { Component } from 'react'
 import './index.scss'
+import TopBar from '../FileContainer/widgets/TopBar';
 
 class ExtendBar extends Component {
     constructor(props) {
@@ -8,7 +9,10 @@ class ExtendBar extends Component {
     render() {
         return (
             <div className='ExtendBarContainer'>
+                {/* <TopBar></TopBar> */}
             </div>
         )
     }
 }
+
+export default ExtendBar

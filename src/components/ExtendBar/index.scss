@@ -1,0 +1,9 @@
+.ExtendBarContainer {
+    height: 100%;
+    width: 16rem;
+    min-width: 16rem;
+    border-right: 1px solid;
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+}

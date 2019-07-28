@@ -7,6 +7,7 @@ import FileContainer from './components/FileContainer';
 import eventBus from './components/EventBus'
 import SideNav from './components/SideNav';
 import HeaderBar from './components/HeaderBar';
+import ExtendBar from './components/ExtendBar';
 import BaseStore from './fundation/BaseStore'
 
 eventBus.on('IPFS_READY', () => {
@@ -24,6 +25,7 @@ function App() {
                 </div>
                 <div className="main">
                     <SideNav></SideNav>
+                    <ExtendBar></ExtendBar>
                     <FileContainer></FileContainer>
                 </div>
                 <div className="footer">
