@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './index.scss'
-import { Provider } from 'mobx-react';
+import { isArray } from '../../util'
 
 class CListItem extends Component {
     constructor(props = {}) {
@@ -29,7 +29,7 @@ class CListItem extends Component {
     expand() {
         this.subItem && this.setState({
             active:true,
-            children: Object.prototype.toString.call(this.subItem) === '[object Array]' ? this.subItem.map((obj, index) => {
+            children: isArray(this.subItem) ? this.subItem.map((obj, index) => {
                 return <CListItem key={index} index={index} active={this.state.active} {...obj}></CListItem>
             }) : []
         })
