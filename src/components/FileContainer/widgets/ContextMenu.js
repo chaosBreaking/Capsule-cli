@@ -62,9 +62,8 @@ class ContextMenu extends Component {
 
 export default ContextMenu
 export function createMenu (arr = []) {
-    const items = arr.map(obj => {
-        return <MenuItem>{ obj.name }</MenuItem>
+    const items = arr.map((obj, index) => {
+        return <MenuItem key={index}>{ obj.name }</MenuItem>
     })
-    console.log(items)
     return <MenuList>{items}</MenuList>
 }

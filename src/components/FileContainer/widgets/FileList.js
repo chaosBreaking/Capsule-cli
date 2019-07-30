@@ -88,7 +88,6 @@ class FileList extends DragSelect {
         this.menu.activateMenu({ x: this.startX, y: this.startY })
     }
     clickHandler(e) {
-        console.log(e.target)
         e.preventDefault()
         e.stopPropagation()
     }
@@ -106,7 +105,6 @@ class FileList extends DragSelect {
             >
                 <ContextMenu onRef = { (ref)=>this.onRef(ref) }></ContextMenu>
                 <div className="dragMusk" id="dragMusk"></div>
-                {/* <Header></Header> */}
                 <div className="listBody" id="listBody" onClick={ e => this.clickHandler(e) }>
                     { listItem }
                 </div>
