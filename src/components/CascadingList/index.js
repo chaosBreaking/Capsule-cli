@@ -35,24 +35,23 @@ class CListItem extends Component {
         })
     }
     render() {
-        const conClass = this.state.active ? 'CListItemMain active' : 'CListItemMain'
+        const conClass = this.state.active ? 'CListItemMain selected' : 'CListItemMain'
         const arrClass = this.state.active ? 'iconfont icon-right alignRight rotate' : 'iconfont icon-right alignRight'
         const clickHandler = this.clickHandler.bind(this)
         return (
-            <div className='CListItem'>
-                {/* <div className='CListItemMusk'></div> */}
-                <div className={conClass} key={this.props.key} index={+this.props.index} onClick={clickHandler}>
+            <li className='CListItem'>
+                <span className={conClass} key={this.props.key} index={+this.props.index} onClick={clickHandler}>
                     <i className='iconfont icon-folder'></i>
                     <span>{ this.props.title }</span>
                     <i className={arrClass}></i>
-                </div>
+                </span>
                 {
                     this.state.active && 
-                    <div className='CListSubItem'>
+                    <ul className='CListSubItem'>
                         { this.state.children}
-                    </div>
+                    </ul>
                 }
-            </div>
+            </li>
         )
     }
 }
@@ -88,9 +87,9 @@ class CascadingList extends Component {
             return <CListItem key={index} index={index} active={this.state.active} {...obj}></CListItem>
         })
         return (
-            <div className='CascadingListContainer'>
+            <ul className='CascadingListContainer'>
                 { this.items }
-            </div>
+            </ul>
         )
     }
 }

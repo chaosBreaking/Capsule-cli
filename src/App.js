@@ -1,38 +1,9 @@
 import React from 'react';
-import './App.css';
-import { Provider, observer } from 'mobx-react'
-import { observable, action } from 'mobx';
-import FileContainer from './components/FileContainer';
-// import node from './service/ipfs'
-import eventBus from './components/EventBus'
-import SideNav from './components/SideNav';
-import HeaderBar from './components/HeaderBar';
-import ExtendBar from './components/ExtendBar';
-import BaseStore from './fundation/BaseStore'
-
-eventBus.on('IPFS_READY', () => {
-    
-})
+import Main from './pages/main'
+import './App.css'
 function App() {
-    let rootStore = new BaseStore()
     return (
-        <Provider store={rootStore}>
-            <div className="App"
-                onClick={e => rootStore.EventBus.emit('GLBClick', e)}
-                onContextMenu={e => rootStore.EventBus.emit('GLBContextMenu')}>
-                <div className="header">
-                    <HeaderBar></HeaderBar>
-                </div>
-                <div className="main">
-                    <SideNav></SideNav>
-                    <ExtendBar></ExtendBar>
-                    <FileContainer></FileContainer>
-                </div>
-                <div className="footer">
-
-                </div>
-            </div>
-        </Provider>
+        <Main></Main>
     );
 }
 
