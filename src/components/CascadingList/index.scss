@@ -1,3 +1,5 @@
+@import "../baseStyle.scss";
+
 .CascadingListContainer {
     display: flex;
     flex-direction: column;
@@ -6,6 +8,12 @@
     display: block;
     padding: 0px;
     margin: 0px;
+
+    // margin-block-start: 1em;
+    // margin-block-end: 1em;
+    // margin-inline-start: 0px;
+    // margin-inline-end: 0px;
+    // padding-inline-start: 0;
 }
 .CListItem {
     position: relative;
@@ -35,12 +43,15 @@
         background: #eee;
     }
 }
-
+.CListSubItem {
+    position: relative;
+    left: 1rem;
+}
 .rotate {
     transform: rotate(90deg);
 }
 .alignLeft {
-    flex: 1 0 auto;
+    flex: 0 1 auto;
     align-self: flex-start;
 }
 .alignRight {

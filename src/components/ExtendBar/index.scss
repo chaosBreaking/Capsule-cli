@@ -1,3 +1,5 @@
+@import '../baseStyle.scss';
+
 .ExtendBarContainer {
     height: 100%;
     width: 16rem;
@@ -5,4 +7,16 @@
     display: flex;
     flex: 1 0 auto;
     flex-direction: column;
+    overflow: hidden;
+}
+.ExtendBarMain {
+    height: 100%;
+    width: 16rem;
+    min-width: 16rem;
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    @include scrollBar;
 }

@@ -36,20 +36,20 @@ class CListItem extends Component {
     }
     render() {
         const conClass = this.state.active ? 'CListItemMain selected' : 'CListItemMain'
-        const arrClass = this.state.active ? 'iconfont icon-right alignRight rotate' : 'iconfont icon-right alignRight'
+        const arrClass = this.state.active ? 'iconfont icon-right alignLeft rotate' : 'iconfont icon-right alignLeft'
         const clickHandler = this.clickHandler.bind(this)
         return (
             <li className='CListItem'>
                 <span className={conClass} key={this.props.key} index={+this.props.index} onClick={clickHandler}>
+                    <i className={arrClass}></i>
                     <i className='iconfont icon-folder'></i>
                     <span>{ this.props.title }</span>
-                    <i className={arrClass}></i>
                 </span>
                 {
                     this.state.active && 
-                    <ul className='CListSubItem'>
-                        { this.state.children}
-                    </ul>
+                    <i className='CListSubItem'>
+                        { this.state.children }
+                    </i>
                 }
             </li>
         )

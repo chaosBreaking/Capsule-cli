@@ -10,7 +10,101 @@ const folderList = [
                 title: 'f1-1',
                 children: [
                     {
-                        title: 'f1-1-1'
+                        title: 'f1-1-1',
+                        children: [{
+                            title: 'f1111',
+                            children: [{
+                                title: 'f22222'
+                            }]
+                        }]
+                    }
+                ]
+            },
+            {
+                title: 'f1-2'
+            },
+        ]
+    },
+    {
+        title: 'f1',
+        children: [
+            {
+                title: 'f1-1',
+                children: [
+                    {
+                        title: 'f1-1-1',
+                        children: [{
+                            title: 'f1111',
+                            children: [{
+                                title: 'f22222'
+                            }]
+                        }]
+                    }
+                ]
+            },
+            {
+                title: 'f1-2'
+            },
+        ]
+    },
+    {
+        title: 'f1',
+        children: [
+            {
+                title: 'f1-1',
+                children: [
+                    {
+                        title: 'f1-1-1',
+                        children: [{
+                            title: 'f1111',
+                            children: [{
+                                title: 'f22222'
+                            }]
+                        }]
+                    }
+                ]
+            },
+            {
+                title: 'f1-2'
+            },
+        ]
+    },
+    {
+        title: 'f1',
+        children: [
+            {
+                title: 'f1-1',
+                children: [
+                    {
+                        title: 'f1-1-1',
+                        children: [{
+                            title: 'f1111',
+                            children: [{
+                                title: 'f22222'
+                            }]
+                        }]
+                    }
+                ]
+            },
+            {
+                title: 'f1-2'
+            },
+        ]
+    },
+    {
+        title: 'f1',
+        children: [
+            {
+                title: 'f1-1',
+                children: [
+                    {
+                        title: 'f1-1-1',
+                        children: [{
+                            title: 'f1111',
+                            children: [{
+                                title: 'f22222'
+                            }]
+                        }]
                     }
                 ]
             },
@@ -21,6 +115,24 @@ const folderList = [
     },
     {
         title: 'f2'
+    },
+    {
+        title: '图片和视频',
+        children: [{
+            title: 'f3-1'
+        }]
+    },
+    {
+        title: '图片和视频',
+        children: [{
+            title: 'f3-1'
+        }]
+    },
+    {
+        title: '图片和视频',
+        children: [{
+            title: 'f3-1'
+        }]
     },
     {
         title: '图片和视频',
@@ -40,7 +152,7 @@ class ExtendBar extends Component {
                 <div>
                     <TopBar middle={topBarTitle} color={'#eee'}></TopBar>
                 </div>
-                <div>
+                <div className='ExtendBarMain'>
                     <CascadingList data={folderList}></CascadingList>
                 </div>
             </div>
