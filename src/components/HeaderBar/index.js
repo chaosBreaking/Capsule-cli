@@ -1,13 +1,14 @@
-import React, { Component, Fragment } from "react";
-import './index.scss'
+import React, { Component, Fragment } from 'react';
+import './index.scss';
 export default class HeaderBar extends Component {
-    constructor(props = {}) {
-        super(props)
-        this.navLinks = []
+    constructor (props = {}) {
+        super(props);
+        this.navLinks = [];
     }
-    render() {
+
+    render () {
         return (
             <header className="topHeader"></header>
-        )
+        );
     }
 }

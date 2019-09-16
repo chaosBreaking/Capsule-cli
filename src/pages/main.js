@@ -1,13 +1,13 @@
 import React from 'react';
-import { Provider } from 'mobx-react'
+import { Provider } from 'mobx-react';
 import HeaderBar from '../components/HeaderBar';
-import BaseStore from '../fundation/BaseStore'
-import { Route } from 'react-router-dom'
+import BaseStore from '../fundation/BaseStore';
+import { Route } from 'react-router-dom';
 import Cloud from './cloud';
 import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 
-function Main() {
-    let rootStore = new BaseStore()
+function Main () {
+    const rootStore = new BaseStore();
     return (
         <Provider store={rootStore}>
             <BrowserRouter>
@@ -29,4 +29,4 @@ function Main() {
     );
 }
 
-export default Main
+export default Main;

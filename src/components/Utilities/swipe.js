@@ -10,6 +10,7 @@ export default function withSwipe (WrappedComponent) {
             this.originX = 0;
             this.originY = 0;
         }
+
         msd (e) {
             e.preventDefault();
             this.flag = 1;
@@ -20,6 +21,7 @@ export default function withSwipe (WrappedComponent) {
             this.startY = e.clientY;
             this.originY = e.clientY;
         }
+
         msm (e) {
             if (!this || !this.flag) return 0;
             const disY = this.startY - e.clientY;
@@ -35,6 +37,7 @@ export default function withSwipe (WrappedComponent) {
                 });
             }, 100);
         }
+
         msu (e) {
             e.preventDefault();
             if (!this || !this.flag) return 0;
@@ -47,6 +50,7 @@ export default function withSwipe (WrappedComponent) {
             });
             if (this.flag) this.flag = 0;
         }
+
         render () {
             return (
                 <React.Fragment>

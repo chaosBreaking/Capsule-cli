@@ -1,10 +1,10 @@
 import React from 'react';
-import Main from './pages/main'
-import './App.css'
-function App() {
+import Main from './pages/main';
+import './App.css';
+function App () {
     return (
         <Main></Main>
     );
 }
 
-export { App }
+export { App };

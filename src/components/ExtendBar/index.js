@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import './index.scss'
+import React, { Component } from 'react';
+import './index.scss';
 import TopBar from '../FileContainer/widgets/TopBar';
 import CascadingList from '../CascadingList';
 const folderList = [
@@ -140,13 +140,14 @@ const folderList = [
             title: 'f3-1'
         }]
     },
-]
+];
 class ExtendBar extends Component {
-    constructor(props) {
-        super(props)
+    constructor (props) {
+        super(props);
     }
-    render() {
-        const topBarTitle = <span>存储</span>
+
+    render () {
+        const topBarTitle = <span>存储</span>;
         return (
             <div className='ExtendBarContainer'>
                 <div>
@@ -156,8 +157,8 @@ class ExtendBar extends Component {
                     <CascadingList data={folderList}></CascadingList>
                 </div>
             </div>
-        )
+        );
     }
 }
 
-export default ExtendBar
+export default ExtendBar;

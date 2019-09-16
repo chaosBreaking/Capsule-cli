@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import './FileCard.scss'
-import img from "../images/file.png"
-import DragSelect from './DragSelect'
+import React, { Component } from 'react';
+import './FileCard.scss';
+import img from '../images/file.png';
+import DragSelect from './DragSelect';
 import ContextMenu, { createMenu } from './ContextMenu';
 import { Grow } from '@material-ui/core';
 const cardMenu = createMenu([
@@ -26,7 +26,7 @@ const cardMenu = createMenu([
     {
         name: '属性'
     },
-])
+]);
 const defaultMenu = createMenu([
     {
         name: '上传文件'
@@ -37,12 +37,13 @@ const defaultMenu = createMenu([
     {
         name: '属性'
     },
-])
+]);
 class CardItem extends Component {
-    constructor(props = {}) {
-        super(props)
+    constructor (props = {}) {
+        super(props);
     }
-    render() {
+
+    render () {
         return (
             <Grow in={true} style={{ transformOrigin: '0 0 0' }} timeout={300}>
                 <div className="card" index={this.props.index} id="cardItem">
@@ -57,63 +58,68 @@ class CardItem extends Component {
                     </div>
                 </div>
             </Grow>
-        )
+        );
     }
 }
 class FileCard extends DragSelect {
-    constructor(props = {}) {
-        super(props)
-        this.debounceBarX = 200
-        this.debounceBarY = 200
-        this.menu = []
+    constructor (props = {}) {
+        super(props);
+        this.debounceBarX = 200;
+        this.debounceBarY = 200;
+        this.menu = [];
         this.on('mouseDown', e => {
-            this.menu && this.menu.clearMenu()
-        })
+            this.menu && this.menu.clearMenu();
+        });
     }
-    caculateSelected() {
-        const { top: borderTop, bottom: borderBottom, left: borderLeft, right: borderRight } = this.target.getBoundingClientRect()
-        const items = document.getElementsByClassName('card')
-        for(let item of items) {
-            let position = item.getBoundingClientRect()
+
+    caculateSelected () {
+        const { top: borderTop, bottom: borderBottom, left: borderLeft, right: borderRight } = this.target.getBoundingClientRect();
+        const items = document.getElementsByClassName('card');
+        for (const item of items) {
+            const position = item.getBoundingClientRect();
             // tolerent bar +-30
-            if (position.top + 100 > borderTop 
-                && position.bottom - 100 < borderBottom
-                && position.left + 100 > borderLeft
-                && position.right - 100 < borderRight
+            if (position.top + 100 > borderTop &&
+                position.bottom - 100 < borderBottom &&
+                position.left + 100 > borderLeft &&
+                position.right - 100 < borderRight
             ) {
-                item.className += ' active'
-                const itemIndex = item.getAttribute('index')
-                !this.selectedArr.includes(itemIndex) && this.selectedArr.push(itemIndex)
+                item.className += ' active';
+                const itemIndex = item.getAttribute('index');
+                !this.selectedArr.includes(itemIndex) && this.selectedArr.push(itemIndex);
             } else {
-                item.className = 'card'
+                item.className = 'card';
             }
         }
     }
-    clearSelected() {
-        const items = document.getElementsByClassName('card')
+
+    clearSelected () {
+        const items = document.getElementsByClassName('card');
         this.selectedArr.forEach(index => {
-            items[index].className = 'card'
-        })
-        this.selectedArr = []
+            items[index].className = 'card';
+        });
+        this.selectedArr = [];
     }
-    onRef(ref) {
-        this.menu = ref
+
+    onRef (ref) {
+        this.menu = ref;
     }
-    contextMenuHandler(e) {
-        e.stopPropagation()
-        e.preventDefault()
-        let option = {}
+
+    contextMenuHandler (e) {
+        e.stopPropagation();
+        e.preventDefault();
+        let option = {};
         if (e.target.id && e.target.id === 'cardMusk') {
-            option = { menu: cardMenu }
+            option = { menu: cardMenu };
         } else {
-            option = { menu: defaultMenu }
+            option = { menu: defaultMenu };
         }
-        this.menu.activateMenu({x: this.startX, y: this.startY, default: false, option})
+        this.menu.activateMenu({ x: this.startX, y: this.startY, default: false, option });
     }
-    render() {
+
+    render () {
         const cardItem = this.props.files.map((file, index) => {
-            return <CardItem key={ index } file={ file } index={ index }></CardItem>
-        })
+            return <CardItem key={ index } file={ file } index={ index }></CardItem>;
+        });
         return (
             <div className="cardContainer"
                 onMouseDown = { e => this.onMouseDown(e) }
@@ -122,12 +128,12 @@ class FileCard extends DragSelect {
                 onMouseLeave = { e => this.onMouseLeave(e) }
                 onContextMenu = { e => this.contextMenuHandler(e) }
             >
-                <ContextMenu onRef = { ref=>this.onRef(ref) }></ContextMenu>
+                <ContextMenu onRef = { ref => this.onRef(ref) }></ContextMenu>
                 <div className="dragMusk" id="dragMusk"></div>
-                    { cardItem }
+                { cardItem }
             </div>
-        )
+        );
     }
 }
 
-export default FileCard
+export default FileCard;
