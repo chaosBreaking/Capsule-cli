@@ -20,22 +20,30 @@ class FileContainer extends Component {
         const right = (
             <React.Fragment>
                 <SearchBar></SearchBar>
-                <i onClick={e => { appState.showUploadZone(); }} className="iconfont icon-uploadfile1 alignEnd block pointer" title='上传文件'>
-                    {/* <input type="file" className="uploadInput" multiple="multiple" ref={this.uploader} onChange={fileChange} /> */}
-                </i>
-                <i onClick={e => { appState.sort(); }} className="iconfont icon-uploadfolder alignEnd block pointer" title='新建文件夹'></i>
-                <i onClick={e => { appState.sort(); }} className="iconfont icon-sortitem alignEnd block pointer" title='排序'></i>
-                <i onClick={e => { appState.change(); }} className="iconfont icon-apps1 alignEnd block pointer" title='显示方式'></i>
+                <div tooltip="上传文件" flow="down">
+                    <i onClick={e => { appState.showUploadZone(); }} className="iconfont icon-uploadfile1 alignEnd block pointer">
+                        {/* <input type="file" className="uploadInput" multiple="multiple" ref={this.uploader} onChange={fileChange} /> */}
+                    </i>
+                </div>
+                <div tooltip="新建文件夹" flow="down">
+                    <i onClick={e => { appState.sort(); }} className="iconfont icon-uploadfolder alignEnd block pointer"></i>
+                </div>
+                <div tooltip="排序" flow="down">
+                    <i onClick={e => { appState.sort(); }} className="iconfont icon-sortitem alignEnd block pointer"></i>
+                </div>
+                <div tooltip="显示方式" flow="down">
+                    <i onClick={e => { appState.change(); }} className="iconfont icon-apps1 alignEnd block pointer"></i>
+                </div>
             </React.Fragment>
         );
         return { right };
     }
 
     render () {
-        const { topBarRight } = this.getTop();
+        const { right } = this.getTop();
         return (
             <div className="container">
-                <TopBar right={topBarRight}></TopBar>
+                <TopBar right={right}></TopBar>
                 <UploadZone show={appState.uploadZoneActive}></UploadZone>
                 {appState.containerType === 'card' && <FileCard files={appState.sortedFileList}></FileCard>}
                 {appState.containerType === 'list' && <FileList files={appState.sortedFileList}></FileList>}
