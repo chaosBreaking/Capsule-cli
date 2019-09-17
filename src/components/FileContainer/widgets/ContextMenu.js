@@ -1,18 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { observable } from 'mobx';
 import { observer, inject } from 'mobx-react';
 import MenuList from '@material-ui/core/MenuList';
 import { MenuItem } from '@material-ui/core';
-import './ContextMenu.scss'
+import './ContextMenu.scss';
 
 @inject('store')
 @observer
 class ContextMenu extends Component {
-    constructor(props = {}) {
-        super(props)
+    constructor (props = {}) {
+        super(props);
         this.state = {
             showMenu: 'hidden'
-        }
+        };
         this.state = {
             menu: (
                 <MenuList onClick={e => this.clearMenu(e)}>
@@ -23,27 +23,31 @@ class ContextMenu extends Component {
                     <MenuItem>Option 5</MenuItem>
                 </MenuList>
             )
-        }
+        };
     }
-    activateMenu(param = {}) {
+
+    activateMenu (param = {}) {
         !param.default && param.option && this.setState({
             menu: param.option.menu
-        })
+        });
         this.setState({
             showMenu: 'visible',
             left: param.x + 'px' || '0px',
             top: param.y + 'px' || '0px'
-        })
+        });
     }
-    clearMenu() {
+
+    clearMenu () {
         this.setState({
             showMenu: 'hidden'
-        })
+        });
     }
-    componentDidMount() {
-        this.props.onRef(this)
+
+    componentDidMount () {
+        this.props.onRef(this);
     }
-    render() {
+
+    render () {
         return (
             <React.Fragment>
                 <div className="ContextMenuContainer" id="ContextMenuContainer"
@@ -56,14 +60,14 @@ class ContextMenu extends Component {
                     { this.state.menu }
                 </div>
             </React.Fragment>
-        )
+        );
     }
 }
 
-export default ContextMenu
+export default ContextMenu;
 export function createMenu (arr = []) {
     const items = arr.map((obj, index) => {
-        return <MenuItem key={index}>{ obj.name }</MenuItem>
-    })
-    return <MenuList>{items}</MenuList>
+        return <MenuItem key={index}>{ obj.name }</MenuItem>;
+    });
+    return <MenuList>{items}</MenuList>;
 }

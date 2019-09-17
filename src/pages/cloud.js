@@ -12,7 +12,7 @@ class Cloud extends Component {
     render () {
         return (
             <div className="main">
-                <SideNav></SideNav>
+                <SideNav active={'cloud'}></SideNav>
                 <ExtendBar></ExtendBar>
                 <FileContainer></FileContainer>
             </div>

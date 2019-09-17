@@ -144,6 +144,7 @@ const folderList = [
 class ExtendBar extends Component {
     constructor (props) {
         super(props);
+        this.id = '';
     }
 
     render () {
