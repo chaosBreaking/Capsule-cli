@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import './UploadZone.scss';
 import { appState } from '../AppStore';
-import { stashFile } from '../../../service/file';
+import { stashFile, getFolderList } from '../../../service/file';
+import CascadingList from '../../CascadingList';
 import Spacer from './Spacer';
 
 class UploadZone extends Component {
     constructor (props = {}) {
         super(props);
+        this.state = {
+            path: ''
+        };
     }
 
     fileChange () {
@@ -22,19 +26,30 @@ class UploadZone extends Component {
         e.target.id === 'uploadZoneContainer' && appState.hideUploadZone();
     }
 
+    setPath (path) {
+        this.setState({
+            path
+        });
+    }
+
     render () {
         const clickHandler = this.clickHandler.bind(this);
         return (
             <div className='uploadZoneAnimate'>
                 {appState.uploadZoneActive && <div className="uploadZoneContainer" id='uploadZoneContainer' onClick={clickHandler}>
                     <div className='uploadZoneDialog'>
-                        <div className='flexLeft border shrinkSelf flexBlock bs2 radius'></div>
+                        <div className='flexLeft border shrinkSelf flexBlock bs2 radius'>
+                            <CascadingList data={getFolderList()} setPath={this.setPath.bind(this)}></CascadingList>
+                        </div>
                         <Spacer />
-                        <div className='flexRight border shrinkSelf flexBlock bs8 radius'></div>
+                        <div className='flexRight border shrinkSelf flexBlock bs8 radius'>
+                            {this.state.path}
+                        </div>
                     </div>
                 </div>}
             </div>
         );
     }
 }
+
 export default UploadZone;

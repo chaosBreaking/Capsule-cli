@@ -35,6 +35,8 @@
     cursor: pointer;
     line-height: 2rem;
     .iconfont {
+        padding-left: 0;
+        // padding-right: 0;
         font-size: 1.3rem;
         transition: all linear .1s;
     }
@@ -42,7 +44,12 @@
         opacity: 1;
         background: #eee;
     }
+    &.selected {
+        opacity: 1;
+        background: #ddd;
+    }
 }
+
 .CListItemMusk {
     position: absolute;
     left: 0;
