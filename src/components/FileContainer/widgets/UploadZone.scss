@@ -33,7 +33,9 @@
     display: flex;
     flex-direction: row;
 }
-
+.zoneLeftBase {
+    padding: .5rem;
+}
 .flexLeft {
     justify-self: flex-start;
 }

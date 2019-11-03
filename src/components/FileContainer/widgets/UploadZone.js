@@ -38,12 +38,12 @@ class UploadZone extends Component {
             <div className='uploadZoneAnimate'>
                 {appState.uploadZoneActive && <div className="uploadZoneContainer" id='uploadZoneContainer' onClick={clickHandler}>
                     <div className='uploadZoneDialog'>
-                        <div className='flexLeft border shrinkSelf flexBlock bs2 radius'>
+                        <div className='zoneLeftBase flexLeft border shrinkSelf flexBlock bs2 radius'>
                             <CascadingList data={getFolderList()} setPath={this.setPath.bind(this)}></CascadingList>
                         </div>
                         <Spacer />
                         <div className='flexRight border shrinkSelf flexBlock bs8 radius'>
-                            {this.state.path}
+                            {this.state.path && this.state.path.split('/').join(' > ')}
                         </div>
                     </div>
                 </div>}
