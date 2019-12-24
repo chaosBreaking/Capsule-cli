@@ -75,6 +75,7 @@ class FileCard extends DragSelect {
     caculateSelected () {
         const { top: borderTop, bottom: borderBottom, left: borderLeft, right: borderRight } = this.target.getBoundingClientRect();
         const items = document.getElementsByClassName('card');
+        // eslint-disable-next-line no-unused-vars
         for (const item of items) {
             const position = item.getBoundingClientRect();
             // tolerent bar +-30

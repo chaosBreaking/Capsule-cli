@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './UploadZone.scss';
-import { appState } from '../AppStore';
 import { stashFile, getFolderList } from '../../../service/file';
 import CascadingList from '../../CascadingList';
 import Spacer from './Spacer';
@@ -11,6 +10,7 @@ class UploadZone extends Component {
         this.state = {
             path: ''
         };
+        this.store = this.props.store;
     }
 
     fileChange () {
@@ -23,7 +23,7 @@ class UploadZone extends Component {
     }
 
     clickHandler (e) {
-        e.target.id === 'uploadZoneContainer' && appState.hideUploadZone();
+        e.target.id === 'uploadZoneContainer' && this.appStore.hideUploadZone();
     }
 
     setPath (path) {
@@ -36,7 +36,7 @@ class UploadZone extends Component {
         const clickHandler = this.clickHandler.bind(this);
         return (
             <div className='uploadZoneAnimate'>
-                {appState.uploadZoneActive && <div className="uploadZoneContainer" id='uploadZoneContainer' onClick={clickHandler}>
+                {this.appStore.uploadZoneActive && <div className="uploadZoneContainer" id='uploadZoneContainer' onClick={clickHandler}>
                     <div className='uploadZoneDialog'>
                         <div className='zoneLeftBase flexLeft border shrinkSelf flexBlock bs2 radius'>
                             <CascadingList data={getFolderList()} setPath={this.setPath.bind(this)}></CascadingList>

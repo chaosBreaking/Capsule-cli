@@ -1,8 +1,8 @@
-import { observable, action } from 'mobx';
+import { observable, action, extendObservable } from 'mobx';
 import BaseStore from '../../fundation/BaseStore';
 import { getFileList } from '../../service/file';
 
-class AppStore extends BaseStore {
+export default class AppStore extends BaseStore {
     @observable containerType = 'list' // 'card' || 'list'
     @observable sortedFileList = []
     @observable uploadZoneActive = false
@@ -19,12 +19,12 @@ class AppStore extends BaseStore {
     }
 
     @action.bound
-    change () {
+    change = () => {
         this.containerType = this.containerType === 'list' ? 'card' : 'list';
     }
 
     @action.bound
-    sort (prop = 'name', rule = 'desc') {
+    sort = (prop = 'name', rule = 'desc') => {
         const arr = rule === 'desc' ? [-1, 1, 0] : [1, -1, 0];
         this.sortedFileList = this.fileStack.sort((a, b) => {
             return a[prop] < b[prop] ? arr[0] : a[prop] > b[prop] ? arr[1] : arr[2];
@@ -32,14 +32,12 @@ class AppStore extends BaseStore {
     }
 
     @action.bound
-    showUploadZone () {
+    showUploadZone = () => {
         this.uploadZoneActive = true;
     }
 
     @action.bound
-    hideUploadZone () {
+    hideUploadZone = () => {
         this.uploadZoneActive = false;
     }
 }
-
-export const appState = new AppStore();

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { observable } from 'mobx';
 import { observer, inject } from 'mobx-react';
 import MenuList from '@material-ui/core/MenuList';
 import { MenuItem } from '@material-ui/core';
