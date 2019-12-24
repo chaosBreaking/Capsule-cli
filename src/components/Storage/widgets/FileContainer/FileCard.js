@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './FileCard.scss';
-import img from '../images/file.png';
-import DragSelect from './DragSelect';
-import ContextMenu, { createMenu } from './ContextMenu';
+import img from '../../images/file.png';
+import DragSelect from '../DragSelect';
+import ContextMenu, { createMenu } from '../ContextMenu';
 import { Grow } from '@material-ui/core';
 const cardMenu = createMenu([
     {

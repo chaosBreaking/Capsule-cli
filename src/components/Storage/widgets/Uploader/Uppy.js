@@ -19,9 +19,9 @@ export default class MyComponent extends React.Component {
             restrictions: { maxNumberOfFiles: 1 },
             autoProceed: true
         });
+        this.uppy = uppy;
         const dom = document.getElementsByClassName('uppy')[0];
         uppy
-            .use(Tus, { endpoint: 'https://master.tus.io/files/' })
             .use(Webcam, {
                 onBeforeSnapshot: () => Promise.resolve(),
                 countdown: false,
@@ -39,8 +39,7 @@ export default class MyComponent extends React.Component {
             .use(GoogleDrive, {
                 target: dom,
                 companionUrl: 'https://companion.uppy.io/',
-            });
-        this.uppy = uppy;
+            }).use(Tus, { endpoint: 'https://master.tus.io/files/' });
 
         uppy.on('complete', (result) => {
             const url = result.successful[0].uploadURL;

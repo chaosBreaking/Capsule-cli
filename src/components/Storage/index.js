@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import { Provider, observer, inject } from 'mobx-react';
 import AppStore from './AppStore';
-import FileCard from './widgets/FileCard';
-import FileList from './widgets/FileList';
+import { FileCard, FileList } from './widgets/FileContainer';
 import './index.scss';
 import TopBar from './widgets/TopBar';
 import SearchBar from './widgets/SearchBar';
-import UploadZone from './widgets/UploadZone';
-import Uppy from './widgets/Uppy.js';
+import { Uppy } from './widgets/Uploader';
 
 @inject('store')
 @observer
-class FileContainer extends Component {
+export default class Storage extends Component {
     constructor (props = {}) {
         super(props);
         this.uploader = React.createRef();
@@ -55,4 +53,3 @@ class FileContainer extends Component {
         );
     }
 }
-export default FileContainer;

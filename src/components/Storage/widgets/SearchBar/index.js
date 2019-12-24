@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import './TopBar.scss';
+import './index.scss';
 
 @inject('store')
 @observer

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import MenuList from '@material-ui/core/MenuList';
 import { MenuItem } from '@material-ui/core';
-import './ContextMenu.scss';
+import './index.scss';
 
 @inject('store')
 @observer

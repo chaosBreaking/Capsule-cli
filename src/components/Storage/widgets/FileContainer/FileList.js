@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
-import { HEADER } from '../Constant';
+import { HEADER } from '../../Constant';
 import './FileList.scss';
-import DragSelect from './DragSelect';
-import ContextMenu from './ContextMenu';
+import DragSelect from '../DragSelect';
+import ContextMenu from '../ContextMenu';
 import { Grow } from '@material-ui/core';
 
 class Header extends Component {

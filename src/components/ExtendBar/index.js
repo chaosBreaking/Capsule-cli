@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './index.scss';
-import TopBar from '../FileContainer/widgets/TopBar';
+import TopBar from '../Storage/widgets/TopBar';
 import CascadingList from '../CascadingList';
 import { getFolderList } from '../../service/file';
 class ExtendBar extends Component {

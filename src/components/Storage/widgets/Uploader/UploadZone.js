@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './UploadZone.scss';
-import { stashFile, getFolderList } from '../../../service/file';
-import CascadingList from '../../CascadingList';
-import Spacer from './Spacer';
+import { stashFile, getFolderList } from '../../../../service/file';
+import CascadingList from '../../../CascadingList';
+import Spacer from '../../../Utilities/Spacer';
 
 class UploadZone extends Component {
     constructor (props = {}) {

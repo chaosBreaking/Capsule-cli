@@ -13,6 +13,7 @@ class DragSelect extends Component {
         this.selectedArr = [];
         // inherit EventEmitter
         const eventProto = new EventEmitter();
+        // eslint-disable-next-line no-unused-vars
         for (const property in eventProto) {
             this[property] = eventProto[property];
         }
