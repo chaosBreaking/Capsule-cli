@@ -1,24 +1,27 @@
 import React from 'react';
 import Uppy from '@uppy/core';
-import Tus from '@uppy/tus';
 import { Dashboard } from '@uppy/react';
-import '@uppy/core/dist/style.css';
-import '@uppy/dashboard/dist/style.css';
 import Webcam from '@uppy/webcam';
 import GoogleDrive from '@uppy/google-drive';
 import { observer, inject } from 'mobx-react';
+import CapsuleTube from './CapsuleTube';
+import Chinese from '@uppy/locales/lib/zh_CN';
+import '@uppy/core/dist/style.css';
+import '@uppy/dashboard/dist/style.css';
 import './Uppy.scss';
-
 @inject('store')
 @observer
-export default class MyComponent extends React.Component {
+export default class UppyUploader extends React.Component {
     constructor (props) {
         super(props);
         const uppy = Uppy({
-            meta: { type: 'avatar' },
-            restrictions: { maxNumberOfFiles: 1 },
-            autoProceed: true
+            restrictions: { maxNumberOfFiles: 10 },
+            autoProceed: false,
+            locale: Chinese,
+            allowMultipleUploads: true,
+            logger: Uppy.debugLogger,
         });
+        window.uppy = uppy;
         this.uppy = uppy;
         const dom = document.getElementsByClassName('uppy')[0];
         uppy
@@ -39,11 +42,16 @@ export default class MyComponent extends React.Component {
             .use(GoogleDrive, {
                 target: dom,
                 companionUrl: 'https://companion.uppy.io/',
-            }).use(Tus, { endpoint: 'https://master.tus.io/files/' });
-
-        uppy.on('complete', (result) => {
-            const url = result.successful[0].uploadURL;
-        });
+            })
+            .use(CapsuleTube, {
+                endpoint: 'http://localhost:80/api/store/upload',
+                formData: false,
+                fieldName: 'files'
+            });
+        // uppy.on('upload', (result) => {
+        // });
+        // uppy.on('complete', (result) => {
+        // });
     }
 
     componentWillUnmount () {
@@ -56,15 +64,25 @@ export default class MyComponent extends React.Component {
     onClick = (event) => {
         event.stopPropagation();
         event.preventDefault();
+        this.uppy.reset();
         this.props.store.hideUploadZone();
     }
 
     render () {
         const { uploadZoneActive } = this.props.store;
+        const dashboardConfig = {
+            showProgressDetails: true,
+            allowMultipleUploads: true,
+            metaFields: [
+                { id: 'name', name: 'Name', placeholder: 'file name' },
+                { id: 'license', name: 'License', placeholder: 'specify license' },
+                { id: 'caption', name: 'Caption', placeholder: 'describe what the image is about' }
+            ]
+        };
         return (
             uploadZoneActive && <div className='uppy'>
                 <div className='mask' onClick={this.onClick}></div>
-                <Dashboard uppy={this.uppy} plugins={['Webcam', 'GoogleDrive']} />
+                <Dashboard uppy={this.uppy} plugins={['Webcam', 'GoogleDrive']} {...dashboardConfig} />
             </div>
         );
     }
