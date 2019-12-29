@@ -42,7 +42,7 @@ export default class CapsuleTube extends Plugin {
             metaFields: null,
             responseUrlFieldName: 'url',
             bundle: false,
-            headers: {},
+            headers: { 'content-type': 'application/json' },
             timeout: 30 * 1000,
             limit: 0,
             withCredentials: false,
@@ -97,14 +97,6 @@ export default class CapsuleTube extends Plugin {
         return opts;
     }
 
-    /*
-    * progress:
-            percentage: 0
-            bytesUploaded: 0
-            bytesTotal: 33717
-            uploadComplete: false
-            uploadStarted: null
-    */
     convert (file) {
         const { id, data } = file;
         return new Promise((resolve, reject) => {
