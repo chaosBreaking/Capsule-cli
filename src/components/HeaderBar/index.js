@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import './index.scss';
 export default class HeaderBar extends Component {
     constructor (props = {}) {
@@ -8,7 +8,9 @@ export default class HeaderBar extends Component {
 
     render () {
         return (
-            <header className="topHeader"></header>
+            <div className="topHeader">
+                Capsule
+            </div>
         );
     }
 }

@@ -17,9 +17,7 @@ class Cloud extends Component {
         return (
             <Provider store={this.store}>
                 <>
-                    <div className="header">
-                        <HeaderBar></HeaderBar>
-                    </div>
+                    <HeaderBar></HeaderBar>
                     <div className="main">
                         <SideNav active={'cloud'}></SideNav>
                         <ExtendBar></ExtendBar>

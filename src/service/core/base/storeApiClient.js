@@ -15,7 +15,16 @@ class PodStore {
     remove (query) {
     }
 
-    getPodData () {
+    getPodData (options = {}) {
+        const { address } = options;
+        try {
+            if (!this._data) {
+                this._data = JSON.parse(localStorage.getItem(address));
+            }
+            return this._data;
+        } catch (error) {
+            return error;
+        }
     }
 };
 
