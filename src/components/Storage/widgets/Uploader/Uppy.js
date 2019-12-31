@@ -74,9 +74,9 @@ export default class UppyUploader extends React.Component {
             showProgressDetails: true,
             allowMultipleUploads: true,
             metaFields: [
-                { id: 'name', name: 'Name', placeholder: 'file name' },
-                { id: 'license', name: 'License', placeholder: 'specify license' },
-                { id: 'caption', name: 'Caption', placeholder: 'describe what the image is about' }
+                { id: 'filename', name: 'Name', placeholder: 'file name' },
+                { id: 'podType', name: 'License', placeholder: 'specify license' },
+                { id: 'caption', name: 'Caption', placeholder: 'describe what the file is about' }
             ]
         };
         return (

@@ -1,10 +1,9 @@
 'use strict';
-const account = require('@utils/account');
-const tools = require('@utils/crypto');
+import tools from '@utils/crypto';
+import { defaultAccountConfig } from './constants';
+import account from '@utils/account';
 
-const { defaultAccountConfig } = require('./constants');
-
-module.exports = class CryptoAccount {
+export default class CryptoAccount {
     constructor (root = {}, option = {}) {
         if (root && typeof root !== 'string') {
             option = root;

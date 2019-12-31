@@ -2,7 +2,8 @@
  * 客户端创建pod存储api
  */
 'use strict';
-const events = require('events');
+import events from 'events';
+
 class PodStore {
     constructor (tableKey, podSchema, podAddress) {
         this.indexKey = podAddress;
@@ -39,4 +40,4 @@ class StoreManager extends events {
     }
 }
 
-module.exports = StoreManager.getInstance();
+export default StoreManager.getInstance();

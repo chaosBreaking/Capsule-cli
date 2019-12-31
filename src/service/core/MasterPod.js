@@ -1,8 +1,8 @@
-const { BasePod } = require('./base');
-const { constants: { defaultPodConfig } } = require('./base');
+import { BasePod, constants } from './base';
 
-class MasterPod extends BasePod {
-    constructor (props) {
+const { defaultPodConfig } = constants;
+export default class MasterPod extends BasePod {
+    constructor (props = {}) {
         props.prefix = defaultPodConfig.MASTER.prefix;
         super(props);
     }
@@ -22,5 +22,3 @@ class MasterPod extends BasePod {
 
     removeChild (key) {}
 };
-
-module.exports = MasterPod;

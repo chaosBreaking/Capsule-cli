@@ -1,9 +1,10 @@
 'use strict';
-const { TypeMap, defaultPodConfig, PodModel } = require('./base/constants');
-const PodStore = require('@core/base/storeApiServer');
-const MasterPod = require('./MasterPod');
-const DocumentPod = require('./DocPod');
-const PostPod = require('./PostPod');
+import { TypeMap, defaultPodConfig, PodModel } from './base/constants';
+import PodStore from './base/storeApiClient';
+import MasterPod from './MasterPod';
+import DocumentPod from './DocPod';
+import PostPod from './PostPod';
+
 const PodLibMap = {
     MASTER: MasterPod,
     DOCUMENT: DocumentPod,
@@ -58,7 +59,7 @@ const queryData = async option => {
     return pod.handle(op, update).catch(err => { throw err; });
 };
 
-module.exports = {
+export {
     PodLibMap,
     createPod,
     registPod,

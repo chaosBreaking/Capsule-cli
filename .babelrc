@@ -1,0 +1,21 @@
+{
+    "presets": [
+        "react-app"
+    ],
+    "plugins": [
+        ["@babel/plugin-proposal-decorators", { "legacy": true }],
+        ["@babel/plugin-proposal-class-properties", { "loose" : true }],
+        ["module-resolver", {
+            "root": ["./"],
+            "alias": {
+              "@src": [ "./src" ],
+              "@service": [ "./src/service" ],
+              "@core": [ "./src/service/core" ],
+              "@fundation": [ "./src/fundation" ],
+              "@utils": [ "./src/utils"],
+              "@pages": [ "./src/pages"],
+              "@components": [ "./src/components"],
+            }
+        }]
+    ]
+}

@@ -1,4 +1,4 @@
-exports.defaultAccountConfig = {
+const defaultAccountConfig = {
     prefix: '00',
     path: 'master',
     type: 'BTC',
@@ -23,7 +23,7 @@ exports.defaultAccountConfig = {
         7: 'GROUP' // 群组
     }
 */
-exports.defaultPodConfig = {
+const defaultPodConfig = {
     MASTER: {
         prefix: '00',
         type: 1,
@@ -92,7 +92,7 @@ const BASE_POD_MODEL = {
         default: {}
     }
 };
-exports.PodModel = {
+const PodModel = {
     BASE: BASE_POD_MODEL,
     MASTER: {
         ...BASE_POD_MODEL,
@@ -105,8 +105,16 @@ exports.PodModel = {
     },
 };
 
-exports.TypeMap = Object.keys(exports.defaultPodConfig).reduce((map, key) => {
-    return Object.assign(map, { [exports.defaultPodConfig[key].type]: key });
+const TypeMap = Object.keys(defaultPodConfig).reduce((map, key) => {
+    return Object.assign(map, { [defaultPodConfig[key].type]: key });
 }, {});
 
-exports.ValidOp = ['update', 'connect', 'fetch', 'regist'];
+const ValidOp = ['update', 'connect', 'fetch', 'regist'];
+
+export {
+    defaultPodConfig,
+    defaultAccountConfig,
+    PodModel,
+    TypeMap,
+    ValidOp,
+};

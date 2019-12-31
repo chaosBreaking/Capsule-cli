@@ -1,11 +1,10 @@
 'use strict';
-
-const tools = require('@utils/crypto');
-const { defaultPodConfig } = require('./constants');
+import tools from '@utils/crypto';
+import { defaultPodConfig } from './constants';
 
 const CID_LENGTH = 46;
 const isValidCID = cid => cid.length === CID_LENGTH && cid.startsWith('Qm');
-module.exports = class PodId {
+export default class PodId {
     constructor (props = {}) {
         const { pubkey, prefix = defaultPodConfig.prefix } = props;
         if (!pubkey) throw new Error('Pubkey required!');

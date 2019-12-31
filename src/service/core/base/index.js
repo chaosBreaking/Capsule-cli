@@ -1,4 +1,4 @@
-module.exports = {
-    BasePod: require('./BasePod'),
-    constants: require('./constants'),
-};
+import BasePod from './BasePod';
+import * as constants from './constants';
+
+export { BasePod, constants };

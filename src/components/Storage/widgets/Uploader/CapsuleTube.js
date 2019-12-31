@@ -131,7 +131,7 @@ export default class CapsuleTube extends Plugin {
     }
 
     install () {
-        this.uppy.addPreProcessor(this.prepareUpload);
+        // this.uppy.addPreProcessor(this.prepareUpload);
         this.uppy.on('upload-progress', this.onProgress);
         this.uppy.addPostProcessor(this.afterUpload);
         this.uppy.addUploader(this.handleUpload);
@@ -204,13 +204,27 @@ export default class CapsuleTube extends Plugin {
         return formPost;
     }
 
-    upload (file, current, total) {
+    async upload (file, current, total) {
         const opts = this.getOptions(file);
 
         this.uppy.log(`uploading ${current} of ${total}`);
-        return new Promise((resolve, reject) => {
-            this.uppy.emit('upload-started', file);
+        this.uppy.emit('upload-started', file);
 
+        const { hash, path, err } = await ipfs.add({
+            path: '/DocumentPod',
+            content: file.data,
+        }).then(res => res[0]).catch(err => {
+            return { err };
+        });
+        if (err) {
+            this.uppy.log(`[XHRUpload] ${file.id} errored`);
+            this.uppy.emit('upload-error', file, err);
+            return err;
+        }
+        const cidFile = Object.assign({}, file, { data: hash, path });
+        this.uppy.setFileState(file.id, cidFile);
+
+        return new Promise((resolve, reject) => {
             const data = opts.formData
                 ? this.createFormDataUpload(file, opts)
                 : this.createBareUpload(file, opts);

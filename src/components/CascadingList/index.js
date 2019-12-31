@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './index.scss';
-import { isArray } from '../../util';
+import { isArray } from '@utils';
 import { inject, Provider } from 'mobx-react';
 import store from './store';
 

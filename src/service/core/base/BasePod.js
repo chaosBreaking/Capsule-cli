@@ -1,9 +1,8 @@
 'use strict';
-const PodId = require('./PodId');
-const { PodModel, ValidOp } = require('./constants');
-const CryptoAccount = require('./CryptoAccount');
-const { defaultPodConfig, TypeMap } = require('./constants');
-const PodStoreServer = require('./storeApiServer'); // 在客户端则加载storeApiClient
+import PodId from './PodId';
+import { PodModel, ValidOp, defaultPodConfig, TypeMap } from './constants';
+import CryptoAccount from './CryptoAccount';
+import storeApi from './storeApiClient'; // 在客户端则加载storeApiClient
 
 class CryptoPod extends PodId {
     constructor (props) {
@@ -16,7 +15,7 @@ class CryptoPod extends PodId {
     }
 };
 
-class BasePod extends CryptoPod {
+export default class BasePod extends CryptoPod {
     constructor (props = {}) {
         super(props);
         const type = TypeMap[this.address[0]];
@@ -41,7 +40,7 @@ class BasePod extends CryptoPod {
             _Store: {
                 writable: false,
                 enumerable: false,
-                value: PodStoreServer
+                value: storeApi
             }
         });
         this.initStore();
@@ -154,5 +153,3 @@ class BasePod extends CryptoPod {
         throw new Error('Permission denied for operation: ' + op);
     }
 };
-
-module.exports = BasePod;

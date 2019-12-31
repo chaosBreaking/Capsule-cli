@@ -1,3 +1,4 @@
+'use strict';
 /*
     DocumentPod
     存储描述
@@ -9,11 +10,10 @@
         options: 扩展字段
     }
 */
-'use strict';
-const { BasePod } = require('./base');
-const { constants: { defaultPodConfig } } = require('./base');
+import { BasePod, constants } from './base';
 
-class DocumentPod extends BasePod {
+const { defaultPodConfig } = constants;
+export default class DocumentPod extends BasePod {
     constructor (props = {}) {
         props.prefix = defaultPodConfig.DOCUMENT.prefix;
         super(props);
@@ -62,5 +62,3 @@ class DocumentPod extends BasePod {
         });
     }
 };
-
-module.exports = DocumentPod;

@@ -1,5 +1,6 @@
-const BasePod = require('./base/BasePod');
-const { constants: { defaultPodConfig, ValidOp } } = require('./base');
+import { BasePod, constants } from './base';
+
+const { defaultPodConfig, ValidOp } = constants;
 
 /*
  post pod: id = 4
@@ -30,7 +31,7 @@ const createPost = data => {
     return { key, post };
 };
 
-class PostPod extends BasePod {
+export default class PostPod extends BasePod {
     constructor (props) {
         props.prefix = defaultPodConfig.POST.prefix;
         super(props);
@@ -69,5 +70,3 @@ class PostPod extends BasePod {
         return true;
     }
 };
-
-module.exports = PostPod;
