@@ -16,14 +16,14 @@ class Cloud extends Component {
     render () {
         return (
             <Provider store={this.store}>
-                <>
+                <div className="App">
                     <HeaderBar></HeaderBar>
                     <div className="main">
                         <SideNav active={'cloud'}></SideNav>
                         <ExtendBar></ExtendBar>
                         <Storage></Storage>
                     </div>
-                </>
+                </div>
             </Provider>
         );
     }
