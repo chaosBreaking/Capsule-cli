@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "baseUrl": "src",
+        "paths": {
+            "@components/*": [ "./components/*" ],
+            "@pages/*": [ "./pages/*" ],
+            "@service/*": [ "./service/*" ],
+            "@utils/*": [ "./utils/*"]
+        },
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "node",
+        "noEmit": true,
+        "noEmitOnError": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "target": "esnext"
+    },
+    "exclude": [
+        "build",
+        "log",
+        "node_modules"
+    ]
+}
