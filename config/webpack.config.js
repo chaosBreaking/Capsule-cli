@@ -103,6 +103,7 @@ module.exports = function (webpackEnv) {
                         postcssNormalize(),
                     ],
                     sourceMap: isEnvProduction && shouldUseSourceMap,
+                    modules: true,
                 },
             },
         ].filter(Boolean);
@@ -429,6 +430,8 @@ module.exports = function (webpackEnv) {
                                 {
                                     importLoaders: 2,
                                     sourceMap: isEnvProduction && shouldUseSourceMap,
+                                    modules: true,
+                                    getLocalIdent: getCSSModuleLocalIdent,
                                 },
                                 'sass-loader'
                             ),

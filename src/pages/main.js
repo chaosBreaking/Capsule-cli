@@ -1,30 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Provider } from 'mobx-react';
-import HeaderBar from '../components/HeaderBar';
-import BaseStore from '../fundation/BaseStore';
-import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
+import { extendObservable } from 'mobx';
+import BaseStore from '@fundation/BaseStore';
+import { BrowserRouter } from 'react-router-dom';
+import Loader from '@components/Loader';
+import Footer from '@components/Footer';
+import LoaderStore from '@components/Loader/store';
 
-function Main () {
-    const rootStore = new BaseStore();
-    return (
-        <Provider store={rootStore}>
-            <BrowserRouter>
-                <div className="App"
-                    onClick={e => rootStore.EventBus.emit('GLBClick', e)}
-                    onContextMenu={e => rootStore.EventBus.emit('GLBContextMenu')}>
-                    <div className="header">
-                        <HeaderBar></HeaderBar>
-                    </div>
-                    <div className="main">
-                        Index
-                    </div>
-                    <div className="footer">
+export default class Main extends Component {
+    constructor (props) {
+        super(props);
+        this.store = new BaseStore();
+        extendObservable(this.store, {
+            loaderStore: new LoaderStore(props, () => this.store)
+        });
+    }
 
+    render () {
+        return (
+            <Provider store={this.store}>
+                <BrowserRouter>
+                    <div className="main"
+                        onClick={e => this.store.EventBus.emit('GLBClick', e)}
+                        onContextMenu={e => this.store.EventBus.emit('GLBContextMenu')}
+                    >
+                        <Loader></Loader>
+                        <Footer></Footer>
                     </div>
-                </div>
-            </BrowserRouter>
-        </Provider>
-    );
+                </BrowserRouter>
+            </Provider>
+        );
+    }
 }
-
-export default Main;

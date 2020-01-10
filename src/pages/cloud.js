@@ -7,7 +7,7 @@ import BaseStore from '../fundation/BaseStore';
 import HeaderBar from '../components/HeaderBar';
 import { Provider } from 'mobx-react';
 
-class Cloud extends Component {
+export default class Cloud extends Component {
     constructor (props = {}) {
         super(props);
         this.store = new BaseStore();
@@ -28,5 +28,3 @@ class Cloud extends Component {
         );
     }
 }
-
-export default Cloud;

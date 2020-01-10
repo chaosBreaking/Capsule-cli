@@ -5,7 +5,9 @@
             "@components/*": [ "./components/*" ],
             "@pages/*": [ "./pages/*" ],
             "@service/*": [ "./service/*" ],
-            "@utils/*": [ "./utils/*"]
+            "@core/*": [ "./service/core/*"],
+            "@utils/*": [ "./utils/*"],
+            "@images/*": [ "./images/*"]
         },
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,

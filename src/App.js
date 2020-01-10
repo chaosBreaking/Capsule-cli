@@ -8,8 +8,8 @@ import './App.css';
 function App () {
     return (
         <BrowserRouter>
+            <Route path='/' exact component={Main}></Route>
             <Route path='/cloud' exact component={Cloud}></Route>
-            <Route path='/main' exact component={Main}></Route>
         </BrowserRouter>
     );
 }

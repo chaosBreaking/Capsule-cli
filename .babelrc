@@ -15,6 +15,7 @@
               "@utils": [ "./src/utils"],
               "@pages": [ "./src/pages"],
               "@components": [ "./src/components"],
+              "@images": [ "./src/images"],
             }
         }]
     ]
