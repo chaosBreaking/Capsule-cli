@@ -21,7 +21,7 @@ export default class Storage extends Component {
     getTop () {
         const right = (
             <React.Fragment>
-                <SearchBar></SearchBar>
+                <SearchBar store={this.store}></SearchBar>
                 <div tooltip="上传文件" flow="down">
                     <i onClick={this.store.showUploadZone} className="iconfont icon-uploadfile1 alignEnd block pointer">
                         {/* <input type="file" className={s.uploadInput} multiple="multiple" ref={this.uploader} onChange={fileChange} /> */}
@@ -45,7 +45,7 @@ export default class Storage extends Component {
         const { right } = this.getTop();
         return (
             <div className={s.container}>
-                <TopBar right={right}></TopBar>
+                <TopBar right={right} store={this.store}></TopBar>
                 <Uppy store={this.store}></Uppy>
                 {this.store.containerType === 'card' && <FileCard files={this.store.sortedFileList}></FileCard>}
                 {this.store.containerType === 'list' && <FileList files={this.store.sortedFileList}></FileList>}

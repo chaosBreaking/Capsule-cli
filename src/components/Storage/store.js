@@ -5,10 +5,15 @@ export default class AppStore {
     @observable containerType = 'list' // 'card' || 'list'
     @observable sortedFileList = []
     @observable uploadZoneActive = false
-    constructor (props = {}) {
+    constructor (props = {}, getRoots = () => {}) {
         this.mounted = false;
         this.fileStack = [];
         this.initFileStore();
+        this.getRoots = getRoots;
+    }
+
+    get rootStore () {
+        return this.getRoots();
     }
 
     initFileStore () {

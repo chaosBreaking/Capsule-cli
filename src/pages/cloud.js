@@ -22,7 +22,9 @@ export default class Cloud extends Component {
     render () {
         return (
             <Provider store={this.store}>
-                <div className="App">
+                <div className="App"
+                    onClick={e => this.store.EventBus.emit('GLBClick', e)}
+                    onContextMenu={e => this.store.EventBus.emit('GLBContextMenu')}>
                     <HeaderBar></HeaderBar>
                     <div className="cloud">
                         <SideNav active={'cloud'}></SideNav>
