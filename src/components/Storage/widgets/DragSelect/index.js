@@ -72,6 +72,7 @@ class DragSelect extends Component {
         }
         e.stopPropagation();
         e.preventDefault();
+        this.caculateSelected();
     }
 
     onMouseUp (e) {

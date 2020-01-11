@@ -69,8 +69,12 @@ export default class UppyUploader extends React.Component {
         this.props.store.hideUploadZone();
     }
 
+    get store () {
+        return this.props.store;
+    }
+
     render () {
-        const { uploadZoneActive } = this.props.store;
+        const { uploadZoneActive } = this.store;
         const dashboardConfig = {
             showProgressDetails: true,
             allowMultipleUploads: true,

@@ -1,4 +1,4 @@
-const exec = require('child_process').exec;
+import { exec } from 'child_process';
 
 const execAsync = function (command) {
     return new Promise((resolve, reject) => {
@@ -36,10 +36,18 @@ const pickObject = (original, object) => {
     return original;
 };
 
-module.exports = {
+const sizeOf = size => {
+    return ((size / 1024) < 1024) ? (size / 1024).toFixed(2) + 'KB'
+        : (size / 1024 ** 2 < 1024 ? (size / 1024 ** 2).toFixed(2) + 'MB'
+            : (size / 1024 ** 3 < 1024 ? (size / 1024 ** 3).toFixed(2) + 'GB'
+                : (size / 1024 ** 4).toFixed(2) + 'TB'));
+};
+
+export default {
     execAsync,
     wait,
     isArray,
     cleanUndefined,
-    pickObject
+    pickObject,
+    sizeOf
 };

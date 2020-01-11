@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
 import s from './index.scss';
 
-@inject('store')
-@observer
-class TopBar extends Component {
+export default class TopBar extends Component {
     constructor (props = {}) {
         super(props);
     }
@@ -25,4 +22,3 @@ class TopBar extends Component {
         );
     }
 }
-export default TopBar;

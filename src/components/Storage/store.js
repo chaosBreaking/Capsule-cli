@@ -1,13 +1,11 @@
 import { observable, action } from 'mobx';
-import BaseStore from '../../fundation/BaseStore';
 import { getFileList } from '../../service/file';
 
-export default class AppStore extends BaseStore {
+export default class AppStore {
     @observable containerType = 'list' // 'card' || 'list'
     @observable sortedFileList = []
     @observable uploadZoneActive = false
     constructor (props = {}) {
-        super(props);
         this.mounted = false;
         this.fileStack = [];
         this.initFileStore();

@@ -1,20 +1,21 @@
-/* eslint-disable react/react-in-jsx-scope */
 import React, { Component } from 'react';
-import SideNav from '../components/SideNav';
-import ExtendBar from '../components/ExtendBar';
-import Storage from '../components/Storage';
-import BaseStore from '../fundation/BaseStore';
-import HeaderBar from '../components/HeaderBar';
+import SideNav from '@components/SideNav';
+import ExtendBar from '@components/ExtendBar';
+import Storage from '@components/Storage';
+import BaseStore from '@fundation/BaseStore';
+import HeaderBar from '@components/HeaderBar';
 import { Provider } from 'mobx-react';
 import { extendObservable } from 'mobx';
 import ListStore from '@components/CascadingList/store';
+import FileStore from '@components/Storage/store';
 
 export default class Cloud extends Component {
     constructor (props = {}) {
         super(props);
         this.store = new BaseStore();
         extendObservable(this.store, {
-            listStore: new ListStore(props, () => this.store)
+            listStore: new ListStore(props, () => this.store),
+            fileStore: new FileStore(props, () => this.store)
         });
     }
 

@@ -4,7 +4,7 @@ import s from './index.scss';
 
 @inject('store')
 @observer
-class SearchBar extends Component {
+export default class SearchBar extends Component {
     constructor (props = {}) {
         super(props);
         this.state = {
@@ -83,4 +83,3 @@ class SearchBar extends Component {
         );
     }
 }
-export default SearchBar;
