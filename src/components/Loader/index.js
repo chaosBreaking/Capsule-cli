@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import s from './index.scss';
 import logo from '@images/logo.png';
-import { deepPurple } from '@material-ui/core/colors';
+// import { deepPurple } from '@material-ui/core/colors';
 
 @inject('store')
 @observer
@@ -16,14 +16,23 @@ export default class Loader extends Component {
         return this.props.store.loaderStore;
     }
 
+    async initForNew () {
+        this.store.buildUserStore();
+        this.store.registPod();
+    }
+
+    async syncData () {
+        const masterPod = this.store.getPod({ type: 'master' });
+        const res = await this.store.fetchData({ type: 'master', pubkey: masterPod.pubkey });
+        console.log(res);
+    }
+
     componentDidMount () {
-        const masterPodAddr = this.store.getPodAddress('master');
-        if (!masterPodAddr) {
-            this.store.buildUserStore();
+        if (!this.store.initialized) {
+            this.initForNew();
+        } else {
+            this.syncData();
         }
-        setTimeout(() => {
-            // this.forward();
-        }, 2000);
     }
 
     forward () {

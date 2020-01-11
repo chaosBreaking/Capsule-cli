@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 export default class CommonStore {
-    request (...params) {
-        return axios(...params);
+    request (service, ...params) {
+        return service(axios, ...params);
     }
 }

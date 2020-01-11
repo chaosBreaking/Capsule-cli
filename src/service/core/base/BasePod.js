@@ -92,8 +92,8 @@ export default class BasePod extends CryptoPod {
     dehydrate () {
         // 得到pod在数据库存储的形式，在save之前使用
         // dehydrate pod into a database store format
-        const { pubkey, address, allow, deny, data } = this;
-        return { pubkey, address, allow, deny, data };
+        const { type, pubkey, address, allow, deny, data } = this;
+        return { type, pubkey, address, allow, deny, data };
     }
 
     connect () {
