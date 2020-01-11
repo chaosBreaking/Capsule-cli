@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import './index.scss';
+import s from './index.scss';
 
 @inject('store')
 @observer
@@ -76,7 +76,7 @@ class SearchBar extends Component {
 
     render () {
         return (
-            <div className="searchBar" onClick={e => this.clickHandler(e)} style={{ width: this.state.barWidth }} title='搜索'>
+            <div className={s.searchBar} onClick={e => this.clickHandler(e)} style={{ width: this.state.barWidth }} title='搜索'>
                 <i className={ 'iconfont icon-fcstubiao13'} id="searchIcon" onClick={e => this.expand(e)} style={{ color: this.state.icon.color }}></i>
                 <input placeholder="搜索文件名或哈希值" id="topBarInput" style={{ width: this.state.inputWidth, visibility: this.state.visibility, paddingRight: this.state.paddingRight }}></input>
             </div>

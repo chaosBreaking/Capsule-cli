@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './index.scss';
+import s from './index.scss';
 export default class HeaderBar extends Component {
     constructor (props = {}) {
         super(props);
@@ -8,7 +8,7 @@ export default class HeaderBar extends Component {
 
     render () {
         return (
-            <div className="topHeader">
+            <div className={s.topHeader}>
                 Capsule
             </div>
         );

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import MenuList from '@material-ui/core/MenuList';
 import { MenuItem } from '@material-ui/core';
-import './index.scss';
+import s from './index.scss';
 
 @inject('store')
 @observer
@@ -49,7 +49,7 @@ class ContextMenu extends Component {
     render () {
         return (
             <React.Fragment>
-                <div className="ContextMenuContainer" id="ContextMenuContainer"
+                <div className={s.ContextMenuContainer} id="ContextMenuContainer"
                     style={{
                         visibility: this.state.showMenu,
                         top: this.state.top,

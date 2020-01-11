@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Provider, observer, inject } from 'mobx-react';
 import AppStore from './AppStore';
 import { FileCard, FileList } from './widgets/FileContainer';
-import './index.scss';
+import s from './index.scss';
 import TopBar from './widgets/TopBar';
 import SearchBar from './widgets/SearchBar';
 import { Uppy } from './widgets/Uploader';
@@ -22,7 +22,7 @@ export default class Storage extends Component {
                 <SearchBar></SearchBar>
                 <div tooltip="上传文件" flow="down">
                     <i onClick={this.appStore.showUploadZone} className="iconfont icon-uploadfile1 alignEnd block pointer">
-                        {/* <input type="file" className="uploadInput" multiple="multiple" ref={this.uploader} onChange={fileChange} /> */}
+                        {/* <input type="file" className={s.uploadInput} multiple="multiple" ref={this.uploader} onChange={fileChange} /> */}
                     </i>
                 </div>
                 <div tooltip="新建文件夹" flow="down">
@@ -43,7 +43,7 @@ export default class Storage extends Component {
         const { right } = this.getTop();
         return (
             <Provider store={this.appStore}>
-                <div className="container">
+                <div className={s.container}>
                     <TopBar right={right}></TopBar>
                     <Uppy></Uppy>
                     {this.appStore.containerType === 'card' && <FileCard files={this.appStore.sortedFileList}></FileCard>}

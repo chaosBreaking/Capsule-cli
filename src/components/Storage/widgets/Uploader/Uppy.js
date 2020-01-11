@@ -8,7 +8,8 @@ import CapsuleTube from './CapsuleTube';
 import Chinese from '@uppy/locales/lib/zh_CN';
 import '@uppy/core/dist/style.css';
 import '@uppy/dashboard/dist/style.css';
-import './Uppy.scss';
+import s from './Uppy.scss';
+
 @inject('store')
 @observer
 export default class UppyUploader extends React.Component {
@@ -80,8 +81,8 @@ export default class UppyUploader extends React.Component {
             ]
         };
         return (
-            uploadZoneActive && <div className='uppy'>
-                <div className='mask' onClick={this.onClick}></div>
+            uploadZoneActive && <div className={s.uppy}>
+                <div className={s.mask} onClick={this.onClick}></div>
                 <Dashboard uppy={this.uppy} plugins={['Webcam', 'GoogleDrive']} {...dashboardConfig} />
             </div>
         );

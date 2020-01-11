@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './ProgressBar.scss';
+import s from './ProgressBar.scss';
 import heart from './heart.png';
 
 class ProgressBar extends Component {
@@ -84,18 +84,18 @@ class ProgressBar extends Component {
         // })
         const item = showItem.map((v, index) => {
             return (
-                <div className="scaleValue" id="scale" key={index} style={{ left: v + '%' }}>
-                    <div className='indicatorLine'></div>
-                    <div className='indicatorValue'>{ v }</div>
+                <div className={s.scaleValue} id="scale" key={index} style={{ left: v + '%' }}>
+                    <div className={s.indicatorLine}></div>
+                    <div className={s.indicatorValue}>{ v }</div>
                 </div>
             );
         });
         return (
-            <div className="barBorder" id="barBorder">
-                <div className="preImg"><img className="heartImg" id="heartImg" alt={''} src={heart} width={32}></img></div>
-                <div className="innerPad" id="innerPad" style={{ width: this.state.progress }}>
+            <div className={s.barBorder} id="barBorder">
+                <div className={s.preImg}><img className={s.heartImg} id="heartImg" alt={''} src={heart} width={32}></img></div>
+                <div className={s.innerPad} id="innerPad" style={{ width: this.state.progress }}>
                 </div>
-                <div className="scaleBar" id="scaleBar">
+                <div className={s.scaleBar} id="scaleBar">
                     { item }
                 </div>
             </div>

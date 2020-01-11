@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import './index.scss';
+import s from './index.scss';
 
 @inject('store')
 @observer
@@ -11,14 +11,14 @@ class TopBar extends Component {
 
     render () {
         return (
-            <div className="topBarContainer" style={{ background: this.props.color }}>
-                <div className="topBarLeft">
+            <div className={s.topBarContainer} style={{ background: this.props.color }}>
+                <div className={s.topBarLeft}>
                     {this.props.left}
                 </div>
-                <div className="topBarMiddle expandSelf">
+                <div className={`${s.topBarMiddle} ${s.expandSelf}`}>
                     {this.props.middle}
                 </div>
-                <div className="topBarRight shrinkSelf">
+                <div className={`${s.topBarRight} ${s.shrinkSelf}`}>
                     {this.props.right}
                 </div>
             </div>

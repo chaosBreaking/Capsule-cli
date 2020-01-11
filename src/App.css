@@ -16,3 +16,9 @@
     text-align: center;
     background: #f4f4f4;
 }
+
+.cloud {
+    flex: 1 0 auto;
+    height: 92vh;
+    display: flex;
+}

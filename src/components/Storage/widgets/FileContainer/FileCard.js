@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import './FileCard.scss';
+import s from './FileCard.scss';
 import img from '../../images/file.png';
 import DragSelect from '../DragSelect';
 import ContextMenu, { createMenu } from '../ContextMenu';
 import { Grow } from '@material-ui/core';
+
 const cardMenu = createMenu([
     {
         name: '打开'
@@ -46,13 +47,13 @@ class CardItem extends Component {
     render () {
         return (
             <Grow in={true} style={{ transformOrigin: '0 0 0' }} timeout={300}>
-                <div className="card" index={this.props.index} id="cardItem">
-                    <div className='cardMusk' id='cardMusk'></div>
-                    <div className="image">
+                <div className={s.card} index={this.props.index} id="cardItem">
+                    <div className={s.cardMusk} id='cardMusk'></div>
+                    <div className={s.image}>
                         <img src={img} alt="cat" width={'100rem'}></img>
                     </div>
-                    <div className="info">
-                        <span className="itemProperty">
+                    <div className={s.info}>
+                        <span className={s.itemProperty}>
                             {this.props.file.name}
                         </span>
                     </div>
@@ -74,7 +75,7 @@ class FileCard extends DragSelect {
 
     caculateSelected () {
         const { top: borderTop, bottom: borderBottom, left: borderLeft, right: borderRight } = this.target.getBoundingClientRect();
-        const items = document.getElementsByClassName('card');
+        const items = document.getElementsByClassName(s.card);
         // eslint-disable-next-line no-unused-vars
         for (const item of items) {
             const position = item.getBoundingClientRect();
@@ -84,19 +85,19 @@ class FileCard extends DragSelect {
                 position.left + 100 > borderLeft &&
                 position.right - 100 < borderRight
             ) {
-                item.className += ' active';
+                item.className += ' ' + s.active;
                 const itemIndex = item.getAttribute('index');
                 !this.selectedArr.includes(itemIndex) && this.selectedArr.push(itemIndex);
             } else {
-                item.className = 'card';
+                item.className = s.card;
             }
         }
     }
 
     clearSelected () {
-        const items = document.getElementsByClassName('card');
+        const items = document.getElementsByClassName(s.card);
         this.selectedArr.forEach(index => {
-            items[index].className = 'card';
+            items[index].className = s.card;
         });
         this.selectedArr = [];
     }
@@ -122,7 +123,7 @@ class FileCard extends DragSelect {
             return <CardItem key={ index } file={ file } index={ index }></CardItem>;
         });
         return (
-            <div className="cardContainer"
+            <div className={s.cardContainer}
                 onMouseDown = { e => this.onMouseDown(e) }
                 onMouseMove = { e => this.onMouseMove(e) }
                 onMouseUp = { e => this.onMouseUp(e) }
@@ -130,7 +131,7 @@ class FileCard extends DragSelect {
                 onContextMenu = { e => this.contextMenuHandler(e) }
             >
                 <ContextMenu onRef = { ref => this.onRef(ref) }></ContextMenu>
-                <div className="dragMusk" id="dragMusk"></div>
+                <div className={s.dragMusk} id="dragMusk"></div>
                 { cardItem }
             </div>
         );

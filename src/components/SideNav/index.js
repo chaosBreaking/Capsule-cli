@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { sideNavItem } from './constant.js';
-import './index.scss';
+import s from './index.scss';
 
 class NavItem extends Component {
     constructor (props) {
@@ -10,10 +10,10 @@ class NavItem extends Component {
     }
 
     render () {
-        const classname = this.props.active === this.id ? 'navItem selected' : 'navItem';
+        const classname = this.props.active === this.id ? `${s.navItem} ${s.selected}` : s.navItem;
         return (
             <div className={classname}>
-                <p className="itemLeftBorder"></p>
+                <p className={s.itemLeftBorder}></p>
                 <i className={ 'iconfont ' + this.props.icon } id={this.props.id} key={this.props.id}></i>
             </div>
         );
@@ -31,11 +31,11 @@ class SideNav extends Component {
         });
         const bottomItem = bottom.map((obj, index) => <NavItem {...obj} key={ index }></NavItem>);
         return (
-            <div className="sideNavContainer">
-                <div className="topPart">
+            <div className={s.sideNavContainer}>
+                <div className={s.topPart}>
                     { topItem }
                 </div>
-                <div className="bottomPart">
+                <div className={s.bottomPart}>
                     { bottomItem }
                 </div>
             </div>

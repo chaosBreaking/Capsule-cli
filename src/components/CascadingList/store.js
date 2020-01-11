@@ -1,18 +1,12 @@
 import { observable, action } from 'mobx';
-import BaseStore from '../../fundation/BaseStore';
+import CommonStore from '@fundation/CommonStore';
 
-class Store extends BaseStore {
+export default class Store extends CommonStore {
     @observable currentPath = '/' // 'card' || 'list'
     @observable selected = '' // 'card' || 'list'
-    constructor (props = {}) {
-        super(props);
-    }
 
     @action.bound
     changePath (path) {
         this.currentPath = path;
     }
 }
-const store = new Store();
-
-export default store;
