@@ -3,12 +3,10 @@ import { TypeMap, defaultPodConfig, PodModel } from './base/constants';
 import PodStore from './base/storeApiClient';
 import MasterPod from './MasterPod';
 import DocumentPod from './DocPod';
-import PostPod from './PostPod';
 
 const PodLibMap = {
     MASTER: MasterPod,
     DOCUMENT: DocumentPod,
-    POST: PostPod,
 };
 
 const ckeckPodExisted = async options => {

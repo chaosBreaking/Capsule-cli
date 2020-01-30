@@ -61,4 +61,18 @@ export default class DocumentPod extends BasePod {
             return { code: 1, msg: err };
         });
     }
+
+    update (data) {
+        const { address, pubkey, files } = data;
+        if (this.address !== address || this.pubkey !== pubkey) {
+            throw new Error('Invalid data');
+        }
+        if (Array.isArray(files)) {
+            files.map(data => {
+                // TODO: 通过updatedAt来比较最新操作，只更新最新操作的版本
+                const { id } = data;
+                this.files[id] = data; // 目前暂时直接覆盖
+            });
+        }
+    }
 };

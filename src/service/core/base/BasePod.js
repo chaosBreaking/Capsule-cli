@@ -1,6 +1,6 @@
 'use strict';
 import PodId from './PodId';
-import { PodModel, ValidOp, defaultPodConfig, TypeMap } from './constants';
+import { PodModel, ValidOp, defaultPodConfig, TypeMap, DEFAULT_DEHYDRATE_OPTIONS } from './constants';
 import CryptoAccount from './CryptoAccount';
 import storeApi from './storeApiClient'; // 在客户端则加载storeApiClient
 
@@ -89,11 +89,17 @@ export default class BasePod extends CryptoPod {
         return this;
     }
 
-    dehydrate () {
+    dehydrate (options = DEFAULT_DEHYDRATE_OPTIONS) {
         // 得到pod在数据库存储的形式，在save之前使用
         // dehydrate pod into a database store format
-        const { type, pubkey, address, allow, deny, data } = this;
-        return { type, pubkey, address, allow, deny, data };
+        if (!Array.isArray(options) && typeof options !== 'string') {
+            throw new Error('options must be a string or an array');
+        }
+        options = Array.isArray(options) ? options : options.split(' ');
+        return options.reduce((res, key) => {
+            res[key] = this[key];
+            return res;
+        }, {});
     }
 
     connect () {

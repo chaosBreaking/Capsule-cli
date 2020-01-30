@@ -101,7 +101,7 @@ export default class CapsuleTube extends Plugin {
         const { data } = file;
         return new Promise((resolve, reject) => {
             ipfs.add({
-                path: '/DocumentPod',
+                path: '/documentPod',
                 content: data,
             }).then(res => {
                 resolve(res[0].hash);

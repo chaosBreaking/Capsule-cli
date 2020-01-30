@@ -51,8 +51,9 @@ export default class UppyUploader extends React.Component {
             });
         // uppy.on('upload', (result) => {
         // });
-        // uppy.on('complete', (result) => {
-        // });
+        uppy.on('complete', (result) => {
+            console.log(result);
+        });
     }
 
     componentWillUnmount () {

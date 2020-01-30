@@ -110,8 +110,9 @@ const TypeMap = Object.keys(defaultPodConfig).reduce((map, key) => {
 }, {});
 
 const ValidOp = ['update', 'connect', 'fetch', 'regist'];
-
+const DEFAULT_DEHYDRATE_OPTIONS = 'type pubkey address allow deny data';
 export {
+    DEFAULT_DEHYDRATE_OPTIONS,
     defaultPodConfig,
     defaultAccountConfig,
     PodModel,

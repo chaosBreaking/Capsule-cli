@@ -4,6 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import s from './index.scss';
 import logo from '@images/logo.png';
 // import { deepPurple } from '@material-ui/core/colors';
+import navigation from '@utils/navigation';
 
 @inject('store')
 @observer
@@ -24,19 +25,19 @@ export default class Loader extends Component {
     async syncData () {
         const masterPod = this.store.getPod({ type: 'master' });
         const res = await this.store.fetchData({ type: 'master', pubkey: masterPod.pubkey });
-        console.log(res);
+        this.store.updatePod(res.data);
     }
 
     componentDidMount () {
         if (!this.store.initialized) {
-            this.initForNew();
+            navigation.forward('/');
         } else {
             this.syncData();
         }
     }
 
     forward () {
-        location.href = '/cloud' + location.search;
+        navigation.forward('/cloud');
     }
 
     render () {

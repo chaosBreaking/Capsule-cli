@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
+import { Provider, observer } from 'mobx-react';
+import { extendObservable } from 'mobx';
 import SideNav from '@components/SideNav';
 import ExtendBar from '@components/ExtendBar';
 import Storage from '@components/Storage';
 import BaseStore from '@fundation/BaseStore';
 import HeaderBar from '@components/HeaderBar';
-import { Provider } from 'mobx-react';
-import { extendObservable } from 'mobx';
 import ListStore from '@components/CascadingList/store';
 import FileStore from '@components/Storage/store';
 
+@observer
 export default class Cloud extends Component {
     constructor (props = {}) {
         super(props);
