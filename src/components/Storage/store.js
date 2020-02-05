@@ -64,9 +64,8 @@ export default class AppStore extends CommonStore {
     createFoder = () => {
         if (!this.inputValue) return;
         this.inputValue = this.inputValue.trim();
-        const path = this.activePath;
+        const path = this.activePath.endsWith('/') ? this.activePath.slice(0, this.activePath.length - 1) : this.activePath;
         this.documentPod.createFoder({ title: this.inputValue, path });
-        // this.podData = Object.assign({}, this.podData, this.documentPod.data);
         this.podData = this.documentPod.data;
         this.isShowInput = false;
         this.inputValue = '';

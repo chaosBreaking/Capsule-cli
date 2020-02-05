@@ -46,7 +46,7 @@ export default class CListItem extends Component {
 
     @computed get expanded () {
         // this.render
-        return this.store.activePath.includes(this.title);
+        return this.store.activePath.includes(this.title + '/');
     }
 
     @action renderTrigger = () => {};
@@ -60,23 +60,26 @@ export default class CListItem extends Component {
             const st = this.path.indexOf(this.title);
             return this.store.setActiveFoder(this.path.slice(0, st) + this.title);
         } else if (this.active) {
+            // 展开
+            if (this.hasChildren) return this.store.setActiveFoder(this.path + '/');
             // 取消活跃
-            const st = this.path.indexOf('/' + this.title);
-            return this.store.setActiveFoder(this.path.slice(st));
+            const st = this.path.indexOf(this.title);
+            return this.store.setActiveFoder(this.path.slice(0, st));
         } else {
+            // 选中状态
             return this.store.setActiveFoder(this.path || this.title);
         }
     }
 
     renderChildren () {
-        return this.children.length > 0 ? <i className={s.CListSubItem}>
+        return this.children.length > 0 ? <div className={s.CListSubItem}>
             {
                 this.children.map((obj, index) => {
                     const data = { ...obj }; // 直接使用obj，传递到子组件不是observable
                     return <CListItem activePath={this.store.activePath} path={`${this.path}/`} store={this.props.store} key={index} deep={this.deep <= 4 ? this.deep + 1 : this.deep} title={obj.title} data={data}></CListItem>;
                 })
             }
-        </i> : null;
+        </div> : null;
     }
 
     render () {
@@ -93,10 +96,7 @@ export default class CListItem extends Component {
                     </div>
                 </div>
                 {
-                    this.expanded &&
-                    <i className={s.CListSubItem}>
-                        {this.renderChildren()}
-                    </i>
+                    this.expanded && this.renderChildren()
                 }
             </div>
         );
