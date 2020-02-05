@@ -6,7 +6,7 @@ const navigation = {
             acc += `${curr[0]}=${curr[1]}&`;
             return acc;
         }, '');
-        if (!search) search = '?';
+        if (!search && params) search = '?';
         if (search.endsWith('&')) search += params;
         else search += `${params}`;
         location.href = origin + url + search;

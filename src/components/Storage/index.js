@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-import { FileCard, FileList } from './widgets/FileContainer';
+import { runInAction } from 'mobx';
 import s from './index.scss';
 import TopBar from './widgets/TopBar';
 import SearchBar from './widgets/SearchBar';
 import { Uppy } from './widgets/Uploader';
+import ExtendBar from '@components/ExtendBar';
+import FoderInput from './widgets/FoderInput';
+import { FileCard, FileList } from './widgets/FileContainer';
 
 @inject('store')
 @observer
@@ -18,6 +21,25 @@ export default class Storage extends Component {
         return this.props.store.fileStore;
     }
 
+    showInput = e => {
+        e.stopPropagation();
+        runInAction(() => {
+            this.store.isShowInput = true;
+        });
+    }
+
+    hideInput = e => {
+        e.stopPropagation();
+        runInAction(() => {
+            this.store.isShowInput = false;
+        });
+    }
+
+    createFoderHandler = e => {
+        e.stopPropagation();
+        this.store.createFoder();
+    }
+
     getTop () {
         const right = (
             <React.Fragment>
@@ -28,7 +50,7 @@ export default class Storage extends Component {
                     </i>
                 </div>
                 <div tooltip="新建文件夹" flow="down">
-                    <i onClick={this.store.sort } className="iconfont icon-uploadfolder alignEnd block pointer"></i>
+                    <i onClick={this.showInput } className="iconfont icon-newfolder2 alignEnd block pointer"></i>
                 </div>
                 <div tooltip="排序" flow="down">
                     <i onClick={this.store.sort } className="iconfont icon-sortitem alignEnd block pointer"></i>
@@ -43,12 +65,25 @@ export default class Storage extends Component {
 
     render () {
         const { right } = this.getTop();
+        const { sortedFileList, changeInput, isShowInput, inputValue } = this.store;
         return (
             <div className={s.container}>
-                <TopBar right={right} store={this.store}></TopBar>
-                <Uppy store={this.store}></Uppy>
-                {this.store.containerType === 'card' && <FileCard files={this.store.sortedFileList}></FileCard>}
-                {this.store.containerType === 'list' && <FileList files={this.store.sortedFileList}></FileList>}
+                <ExtendBar></ExtendBar>
+                <div className={s.main}>
+                    <TopBar right={right} store={this.store} color={'#eee'}></TopBar>
+                    <Uppy store={this.store}></Uppy>
+                    {isShowInput && <FoderInput inputValue={inputValue} onSubmit={this.createFoderHandler} onCancel={this.hideInput} handleChange={changeInput}></FoderInput>}
+                    { sortedFileList.length > 0
+                        ? (<>
+                            {this.store.containerType === 'card' && <FileCard files={sortedFileList}></FileCard>}
+                            {this.store.containerType === 'list' && <FileList files={sortedFileList}></FileList>}
+                        </>)
+                        : <div className={s.empty}>
+                            <div className={s.emptyImg}></div>
+                            <span className={s.emptyInfo}>空文件夹</span>
+                        </div>
+                    }
+                </div>
             </div>
         );
     }

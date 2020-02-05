@@ -15,11 +15,18 @@ class ContextMenu extends Component {
         this.state = {
             menu: (
                 <MenuList onClick={e => this.clearMenu(e)}>
-                    <MenuItem>Option 1</MenuItem>
-                    <MenuItem>Option 2</MenuItem>
-                    <MenuItem>Option 3</MenuItem>
-                    <MenuItem>Option 4</MenuItem>
-                    <MenuItem>Option 5</MenuItem>
+                    <MenuItem>
+                        <i className={'iconfont icon-newfolder2 ' + s.icon}></i>
+                        新建文件夹
+                    </MenuItem>
+                    <MenuItem>
+                        <i className={'iconfont icon-uploadfile1 ' + s.icon}></i>
+                        上传文件
+                    </MenuItem>
+                    <MenuItem>
+                        <i className={'iconfont icon-uploadfolder ' + s.icon}></i>
+                        上传文件夹
+                    </MenuItem>
                 </MenuList>
             )
         };

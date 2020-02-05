@@ -35,17 +35,22 @@
     line-height: 2rem;
     .iconfont {
         padding-left: 0;
-        // padding-right: 0;
+        // padding-right: 1rem;
         font-size: 1.3rem;
         transition: all linear .1s;
     }
     &:hover {
         opacity: 1;
-        background: #eee;
-    }
-    &.selected {
-        opacity: 1;
         background: #ddd;
+    }
+}
+
+.selected {
+    opacity: 1;
+    background: #ccc;
+    &:hover {
+        opacity: 1;
+        background: #ccc;
     }
 }
 
@@ -64,10 +69,16 @@
     transform: rotate(90deg);
 }
 .alignLeft {
+    display: inline-block;
     flex: 0 1 auto;
     align-self: flex-start;
 }
 .alignRight {
     right: 0;
     position: absolute;
+}
+
+.noChildren {
+    display: inline-block;
+    width: 1rem;
 }

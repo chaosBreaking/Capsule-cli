@@ -1,37 +1,26 @@
 import React, { Component } from 'react';
-import { inject, Provider, observer } from 'mobx-react';
-import store from './store';
+import { observer, inject } from 'mobx-react';
+import { extendObservable } from 'mobx';
 import List from '@material-ui/core/List';
 import CListItem from './CListItem';
 import s from './index.scss';
-
 @inject('store')
 @observer
 class CascadingList extends Component {
-    constructor (props) {
-        super(props);
-        this.state = {
-            list: props.data || [],
-            collapse: false,
-            active: {},
-            selected: ''
-        };
-    }
-
     get store () {
-        return this.props.store.listStore;
+        return this.props.store.fileStore;
     }
 
     render () {
-        this.items = this.state.list.map((obj, index) => {
-            return <CListItem store={this.store} key={index} index={index} active={this.state.active} {...obj} deep={0} path={`/${obj.title}`}></CListItem>;
-        });
+        const { foderList, activePath } = this.store;
         return (
-            <Provider store={store}>
-                <List className={s.root}>
-                    {this.items}
-                </List>
-            </Provider>
+            <List className={s.root}>
+                {foderList.map((obj, index) => {
+                    // extendObservable(obj.children, [...obj.children]);
+                    console.log(obj)
+                    return <CListItem activePath={activePath} data={obj} title={obj.title} key={index} deep={0}></CListItem>;
+                })}
+            </List>
         );
     }
 }

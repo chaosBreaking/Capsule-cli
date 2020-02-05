@@ -1,24 +1,34 @@
-import { observable, action } from 'mobx';
-import { getFileList } from '../../service/file';
+import { observable, action, computed, autorun } from 'mobx';
+import CommonStore from '@fundation/CommonStore';
 
-export default class AppStore {
-    @observable containerType = 'list' // 'card' || 'list'
+export default class AppStore extends CommonStore {
+    @observable containerType = 'card' // 'card' || 'list'
     @observable sortedFileList = []
     @observable uploadZoneActive = false
-    constructor (props = {}, getRoots = () => {}) {
+    @observable isShowInput = false
+    @observable inputValue = ''
+    @observable podData = {};
+    @observable activePath = '';
+
+    constructor (props = {}, getRoot = () => {}) {
+        super();
+        this.getRoot = getRoot;
         this.mounted = false;
         this.fileStack = [];
-        this.initFileStore();
-        this.getRoots = getRoots;
+        this.documentPod = this.rootStore.getPod({ type: 'document' });
+        Object.assign(this.podData, this.documentPod.data);
     }
 
-    get rootStore () {
-        return this.getRoots();
-    }
-
-    initFileStore () {
-        this.fileStack = getFileList();
-        this.sort();
+    @computed get foderList () {
+        return Object.keys(this.podData).map(foderTitle => {
+            const foder = this.documentPod.data[foderTitle];
+            const { data, children } = foder;
+            return {
+                title: foderTitle,
+                data,
+                children
+            };
+        });
     }
 
     @action.bound
@@ -42,5 +52,28 @@ export default class AppStore {
     @action.bound
     hideUploadZone = () => {
         this.uploadZoneActive = false;
+    }
+
+    @action.bound
+    changeInput = e => {
+        e.stopPropagation();
+        this.inputValue = e.target.value;
+    }
+
+    @action.bound
+    createFoder = () => {
+        if (!this.inputValue) return;
+        this.inputValue = this.inputValue.trim();
+        const path = this.activePath;
+        this.documentPod.createFoder({ title: this.inputValue, path });
+        // this.podData = Object.assign({}, this.podData, this.documentPod.data);
+        this.podData = this.documentPod.data;
+        this.isShowInput = false;
+        this.inputValue = '';
+    }
+
+    @action.bound
+    setActiveFoder = path => {
+        this.activePath = path;
     }
 }

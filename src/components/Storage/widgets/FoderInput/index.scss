@@ -1,0 +1,28 @@
+$fontSize: 1.7rem;
+.container {
+    position: absolute;
+    right: 0;
+    top: 4rem;
+    padding: .5rem;
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+    height: 10rem;
+    min-height: 3rem;
+    align-items: center;
+    background: #eee;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;
+    z-index: 1;
+    border-radius: .5rem;
+}
+
+.top {
+    width: 100%;
+}
+
+.bottom {
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-around;
+}

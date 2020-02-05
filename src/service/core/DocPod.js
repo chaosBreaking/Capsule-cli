@@ -2,12 +2,17 @@
 /*
     DocumentPod
     存储描述
-    {
-        id: 用于唯一识别文件
-        filename: 文件名,
-        cid: ipfs cid,
-        path: 路径，概念同文件夹,
-        options: 扩展字段
+    data: {
+        foderName1: {
+            filename: 文件名,
+            cid: ipfs cid,
+            options: 扩展字段
+        },
+        foderName2: {
+            filename: 文件名,
+            cid: ipfs cid,
+            options: 扩展字段
+        }
     }
 */
 import { BasePod, constants } from './base';
@@ -23,56 +28,51 @@ export default class DocumentPod extends BasePod {
         return this.data;
     }
 
-    async addFile (file = {}) {
-        const fileArray = Object.prototype.toString.call(file) === '[object Array]' ? [...file] : [file];
-        const tasks = fileArray.map(file => {
-            const { id, ...rest } = file;
-            return this.storeAPI.updatePod({ files: { [id]: rest } });
-        });
-        Promise.all(tasks).then(res => {
-            return { code: 0, data: res };
-        }).catch(err => {
-            return { code: 1, msg: err };
-        });
-    }
-
-    async removeFile (file = {}) {
-        const fileArray = Object.prototype.toString.call(file) === '[object Array]' ? [...file] : [file];
-        const tasks = fileArray.map(file => {
-            const { id } = file;
-            return this.storeAPI.updatePod({ $set: { files: { [id]: undefined } } }, { omitUndefined: true });
-        });
-        Promise.all(tasks).then(res => {
-            return { code: 0, data: res };
-        }).catch(err => {
-            return { code: 1, msg: err };
-        });
-    }
-
-    async updateFile (file = {}) {
-        const fileArray = Object.prototype.toString.call(file) === '[object Array]' ? [...file] : [file];
-        const tasks = fileArray.map(file => {
-            const { id, ...rest } = file;
-            return this.storeAPI.updatePod({ $set: { files: { [id]: rest } } });
-        });
-        Promise.all(tasks).then(res => {
-            return { code: 0, data: res };
-        }).catch(err => {
-            return { code: 1, msg: err };
-        });
-    }
-
-    update (data) {
-        const { address, pubkey, files } = data;
-        if (this.address !== address || this.pubkey !== pubkey) {
-            throw new Error('Invalid data');
-        }
-        if (Array.isArray(files)) {
-            files.map(data => {
-                // TODO: 通过updatedAt来比较最新操作，只更新最新操作的版本
-                const { id } = data;
-                this.files[id] = data; // 目前暂时直接覆盖
+    createFoder (foder) {
+        const { title, data = {}, path = '' } = foder;
+        const target = path.split('/').reduce((acc, currPath) => {
+            return acc[currPath] ? acc[currPath] : acc.children ? acc.children.find(child => child.title === currPath) : acc;
+        }, this.data);
+        const newFoder = {
+            data,
+            children: []
+        };
+        if (target === this.data) {
+            this.data[title] = newFoder;
+        } else {
+            target.children.push({
+                title,
+                ...newFoder
             });
         }
+    }
+
+    addFile (foder, files) {
+        foder = typeof foder === 'object' ? foder.title : foder;
+        files = Array.isArray(files) ? files : [files];
+        const data = files.reduce((acc, file) => {
+            acc[file.filename] = file;
+        }, {});
+        if (this.data[foder]) {
+            Object.assign(this.data[foder].data, data);
+        }
+    }
+
+    removeFile (foder, filename) {
+        foder = typeof foder === 'object' ? foder.title : foder;
+        if (this.data[foder]) {
+            delete this.data[foder].data[filename];
+        }
+        return false;
+    }
+
+    updateFile (foder, file = {}, update) {
+        foder = typeof foder === 'object' ? foder.title : foder;
+        if (this.data[foder]) {
+            const key = file.filename || file.cid;
+            Object.assign(this.data[foder].data[key], update);
+            return this;
+        }
+        return false;
     }
 };

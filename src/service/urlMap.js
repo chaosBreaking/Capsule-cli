@@ -1,7 +1,16 @@
 const apiCommon = 'http://localhost:80/api/pod';
 
-const getUrl = path => apiCommon + path;
+const getUrl = (url = '', path) => {
+    url = url || apiCommon;
+    const needProtocol = !url.startsWith('http://') || !url.startsWith('https://');
+    if (needProtocol) {
+        url = 'http://' + url;
+    }
+    if (!url.endsWith('/api')) url += '/api';
+    return url + path;
+};
 
-export const fetchPod = (provider, params) => provider.post(getUrl('/fetch'), params);
-export const fetchData = (provider, params) => provider.post(getUrl('/query'), params);
-export const registPod = (provider, params) => provider.post(getUrl('/regist'), params);
+export const fetchPod = (provider, url, params) => provider.post(getUrl(url, '/pod/fetch'), params);
+export const fetchData = (provider, url, params) => provider.post(getUrl(url, '/pod/query'), params);
+export const registPod = (provider, url, params) => provider.post(getUrl(url, '/pod/regist'), params);
+export const syncPod = (provider, url, params) => provider.post(getUrl(url, '/pod/update'), params);

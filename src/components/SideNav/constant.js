@@ -15,11 +15,11 @@ export const sideNavItem = {
             id: 'share',
             icon: 'icon-fenxiang2',
             url: '/share'
-        }, {
-            title: '回收站',
-            id: 'trash',
-            icon: 'icon-shanchu',
-            url: '/trash'
+        // }, {
+        //     title: '回收站',
+        //     id: 'trash',
+        //     icon: 'icon-shanchu',
+        //     url: '/trash'
         }
     ],
     bottom: [

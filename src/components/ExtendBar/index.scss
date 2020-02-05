@@ -18,5 +18,6 @@
     flex-direction: column;
     overflow-x: hidden;
     overflow-y: auto;
+    background: #f4f4f4;
     @include scrollBar;
 }

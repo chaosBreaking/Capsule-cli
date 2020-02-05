@@ -4,21 +4,21 @@ import { createPod } from '@service/core';
 import { CryptoAccount } from '@core/base';
 import CommonStore from './CommonStore';
 // import crypto from '@utils/crypto';
-import { fetchPod, fetchData, registPod } from '@service/urlMap';
+import { fetchPod, fetchData, registPod, syncPod } from '@service/urlMap';
 
 const DOCUMENT_POD_PATH = "m/44'/0'/2'/0/0";
 
 export default class BaseStore extends CommonStore {
     @observable initialized = false;
+    @observable _podMap = {};
     constructor (props = {}) {
         super(props);
         this.EventBus = new Event();
-        this._podMap = {};
         this.init();
     }
 
-    get masterAddress () {
-        return this._podMap.master && this._podMap.master.address;
+    get register () {
+        return this._register || {};
     }
 
     get podList () {
@@ -28,10 +28,23 @@ export default class BaseStore extends CommonStore {
         }, []);
     }
 
+    addRegisterInfo (address, value) {
+        if (!this._register) this._register = [];
+        this._register[address] = value;
+        return true;
+    }
+
+    request (service, params) {
+        const providerUrl = this._provider[0] && this._provider[0].value;
+        if (!providerUrl) throw new Error('Need specify provider');
+        return super.request(service, providerUrl, params);
+    }
+
     @action.bound
     init () {
-        this._account = localStorage.getItem('ACCOUNT_META');
-        this._provider = localStorage.getItem('PROVIDER_META');
+        this._account = JSON.parse(localStorage.getItem('ACCOUNT_META'));
+        this._provider = JSON.parse(localStorage.getItem('PROVIDER_META'));
+        this._register = JSON.parse(localStorage.getItem('POD_REGISTER'));
         if (!this._account || !this._provider) {
             return;
         }
@@ -39,10 +52,11 @@ export default class BaseStore extends CommonStore {
         const podAddressList = JSON.parse(localStorage.getItem('POD_ADDRESS_LIST')) || [];
         if (podAddressList.length === 0) return;
         // type 在provider和传输过程中大写，在store实例中转换为小写
-        podAddressList.reduce((map, obj) => {
+        const pods = podAddressList.reduce((map, obj) => {
             map[obj.type.toLowerCase()] = createPod(obj.type, obj);
             return map;
-        }, this._podMap);
+        }, {});
+        this._podMap = pods;
         window.pods = this._podMap; // temporary
         this.initialized = true;
     }
@@ -71,10 +85,6 @@ export default class BaseStore extends CommonStore {
             }
         }
         throw new Error('Cannot find the required pod');
-    }
-
-    getPodAddress (type = '') {
-        return this._podMap[type] && this._podMap[type].address;
     }
 
     setAccountMetaInfo (data) {
@@ -116,12 +126,12 @@ export default class BaseStore extends CommonStore {
      * @param {*} [pod=[]]
      * @memberof BaseStore
      */
-    async registPod (pod = []) {
+    async registPod (pod = this.podList) {
         pod = pod && Array.isArray(pod) ? pod : [pod];
-        const podList = [...this.podList, ...pod].filter(item => !item.localData || !item.localData.provider);
+        const podList = pod.filter(item => !this.register[item.address]);
         const tasks = podList.map(pod => {
             this.request(registPod, pod.dehydrate()).then(result => {
-                pod.localData.provider = result;
+                return this.addRegisterInfo(pod.address, Date.now());
             });
         });
         const res = await Promise.all(tasks).catch(err => { throw err; });
@@ -143,6 +153,11 @@ export default class BaseStore extends CommonStore {
         const pod = this.getPod(podQuery);
         const res = await this.request(fetchData, { pubkey: pod.pubkey, type: pod.type });
         return res.data;
+    }
+
+    async syncPod (pod) {
+        const tasks = this.podList.map(pod => this.request(syncPod, pod.dehydrate()));
+        await Promise.all(tasks);
     }
 
     updatePod (data) {

@@ -2,17 +2,12 @@ import React, { Component } from 'react';
 import s from './index.scss';
 import TopBar from '../Storage/widgets/TopBar';
 import CascadingList from '../CascadingList';
-import { getFolderList } from '../../service/file';
+// import { getFolderList } from '../../service/file';
 import { inject, observer } from 'mobx-react';
 
 @inject('store')
 @observer
 class ExtendBar extends Component {
-    constructor (props) {
-        super(props);
-        this.id = '';
-    }
-
     get store () {
         return this.props.store;
     }
@@ -22,10 +17,10 @@ class ExtendBar extends Component {
         return (
             <div className={s.ExtendBarContainer}>
                 <div>
-                    <TopBar middle={topBarTitle} color={'#eee'}></TopBar>
+                    <TopBar middle={topBarTitle} color={'#ddd'}></TopBar>
                 </div>
                 <div className={s.ExtendBarMain}>
-                    <CascadingList data={getFolderList()}></CascadingList>
+                    <CascadingList></CascadingList>
                 </div>
             </div>
         );

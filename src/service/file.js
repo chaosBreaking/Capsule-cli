@@ -204,6 +204,7 @@ export function getFolderList () {
     return [
         {
             title: 'f1',
+            data: {},
             children: [
                 {
                     title: 'f1-1',

@@ -1,5 +1,10 @@
 .container {
-    // position: relative;
+    display: flex;
+    flex: 1 0 auto;
+}
+
+.main {
+    position: relative;
     width: 100%;
     height: 100%;
     display: flex;
@@ -22,8 +27,18 @@
     outline:0;
 }
 
-.uploadZone {
+.empty {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.emptyInfo {
+  font-size: 4rem;
+  font-weight: 100;
 }
 
 /* START TOOLTIP STYLES */

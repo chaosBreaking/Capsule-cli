@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export default class CommonStore {
     get rootStore () {
-        return this.getRoot();
+        return typeof this.getRoot === 'function' && this.getRoot();
     }
 
     request (service, ...params) {

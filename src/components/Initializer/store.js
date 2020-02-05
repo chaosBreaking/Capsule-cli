@@ -36,14 +36,14 @@ export default class AppStore extends CommonStore {
         }
     ];
 
-    constructor (props = {}, getRoots = () => {}) {
+    constructor (props = {}, getRoot = () => {}) {
         super(props);
         this._podMap = {};
-        this.getRoots = getRoots;
+        this.getRoot = getRoot;
     }
 
     get rootStore () {
-        return this.getRoots();
+        return this.getRoot();
     }
 
     get steps () {
@@ -131,6 +131,7 @@ export default class AppStore extends CommonStore {
         const documentAccount = new CryptoAccount(masterAccount, { path: DOCUMENT_POD_PATH });
         const masterPod = createPod('master', masterAccount);
         const documentPod = createPod('document', documentAccount);
+        documentPod.createFoder({ title: '默认文件夹' });
         [masterPod, documentPod].map(pod => {
             this._podMap[pod.type] = pod;
         });

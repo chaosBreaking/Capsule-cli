@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Provider, observer } from 'mobx-react';
 import { extendObservable } from 'mobx';
 import SideNav from '@components/SideNav';
-import ExtendBar from '@components/ExtendBar';
 import Storage from '@components/Storage';
 import BaseStore from '@fundation/BaseStore';
 import HeaderBar from '@components/HeaderBar';
@@ -29,7 +28,6 @@ export default class Cloud extends Component {
                     <HeaderBar></HeaderBar>
                     <div className="cloud">
                         <SideNav active={'cloud'}></SideNav>
-                        <ExtendBar></ExtendBar>
                         <Storage></Storage>
                     </div>
                 </div>
