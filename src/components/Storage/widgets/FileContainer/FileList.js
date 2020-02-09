@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
+import { observer, inject } from 'mobx-react';
+import { computed } from 'mobx';
 import { HEADER } from '../../constant';
 import s from './FileList.scss';
 import DragSelect from '../DragSelect';
@@ -39,6 +41,8 @@ class ListItem extends Component {
         );
     }
 }
+@inject('store')
+@observer
 class FileList extends DragSelect {
     constructor (props = {}) {
         super(props);
@@ -61,12 +65,16 @@ class FileList extends DragSelect {
         });
     }
 
+    get filesList () {
+        return this.props.store.currentFilesList;
+    }
+
     caculateSelected () {
         const { top: borderTop, bottom: borderBottom } = this.target.getBoundingClientRect();
         const items = document.getElementsByClassName(s.listItem);
         for (const item of items) {
             const position = item.getBoundingClientRect();
-            // tolerent bar +-30
+            // tolerence bar +-30
             if (position.top + 30 > borderTop && position.bottom - 30 < borderBottom) {
                 item.className += ' ' + s.active;
                 const itemIndex = item.getAttribute('index');
@@ -100,10 +108,13 @@ class FileList extends DragSelect {
         e.stopPropagation();
     }
 
-    render () {
-        const listItem = this.props.files.map((file, index) => {
+    renderItems () {
+        return this.filesList.map((file, index) => {
             return <ListItem key={index} file={file} index={index}></ListItem>;
         });
+    }
+
+    render () {
         return (
             <div className={s.listContainer}
                 onMouseDown = { e => this.onMouseDown(e) }
@@ -115,7 +126,7 @@ class FileList extends DragSelect {
                 <ContextMenu onRef = { (ref) => this.onRef(ref) }></ContextMenu>
                 <div className={s.dragMusk} id="dragMusk"></div>
                 <div className={s.listBody} id="listBody" onClick={ e => this.clickHandler(e) }>
-                    { listItem }
+                    { this.renderItems() }
                 </div>
             </div>
         );

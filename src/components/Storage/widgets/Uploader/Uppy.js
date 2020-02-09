@@ -45,14 +45,24 @@ export default class UppyUploader extends React.Component {
                 companionUrl: 'https://companion.uppy.io/',
             })
             .use(CapsuleTube, {
-                endpoint: 'http://localhost:80/api/store/upload',
-                formData: false,
-                fieldName: 'files'
+                endpoint: 'http://localhost:6842/api/store/upload',
+                ipfsEndpoint: 'http://101.132.121.111:5001',
+                localUpload: false, // 在本地上传到ipfs
+                formData: true,
+                fieldName: 'data'
             });
-        // uppy.on('upload', (result) => {
-        // });
-        uppy.on('complete', (result) => {
-            console.log(result);
+
+        uppy.on('complete', result => {
+            if (result && result.successful.length > 0) {
+                const fileArray = result.successful.map(res => {
+                    const { response: { status, body }, meta, size } = res;
+                    if (status === 200 && body.code === 0) {
+                        return { ...body.data, ...meta, size };
+                    }
+                });
+                this.props.store.uploadResultHandler(fileArray);
+                return true;
+            }
         });
     }
 

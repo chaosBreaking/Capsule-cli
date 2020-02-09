@@ -7,7 +7,6 @@ import RateLimitedQueue from '@uppy/utils/lib/RateLimitedQueue';
 import Translator from '@uppy/utils/lib/Translator';
 import cuid from 'cuid';
 
-const ipfs = ipfsClient('http://localhost:5001');
 /**
  * 1.Preprocessing
  * 2.Uploading
@@ -35,6 +34,8 @@ export default class CapsuleTube extends Plugin {
         super(uppy, opts);
         this.id = opts.id || 'CapsuleTube';
         this.type = 'uploader';
+        this._ipfs = ipfsClient(opts.ipfsEndpoint);
+        this.localUpload = opts.localUpload || false;
         const defaultOptions = {
             formData: true,
             fieldName: 'files[]',
@@ -42,7 +43,8 @@ export default class CapsuleTube extends Plugin {
             metaFields: null,
             responseUrlFieldName: 'url',
             bundle: false,
-            headers: { 'content-type': 'application/json' },
+            headers: {},
+            // headers: { 'content-type': 'application/json' },
             timeout: 30 * 1000,
             limit: 0,
             withCredentials: false,
@@ -100,7 +102,7 @@ export default class CapsuleTube extends Plugin {
     convert (file) {
         const { data } = file;
         return new Promise((resolve, reject) => {
-            ipfs.add({
+            this._ipfs.add({
                 path: '/documentPod',
                 content: data,
             }).then(res => {
@@ -120,7 +122,6 @@ export default class CapsuleTube extends Plugin {
                 const merkleFile = Object.assign({}, file, { data: cid });
                 // const merkleFile = Object.assign({}, file, { data: merkleData, progress: { uploadComplete: true } });
                 this.uppy.setFileState(fileID, merkleFile);
-                console.log(this.uppy.getFile(fileID));
             });
         });
         return Promise.all(promises);
@@ -210,19 +211,22 @@ export default class CapsuleTube extends Plugin {
         this.uppy.log(`uploading ${current} of ${total}`);
         this.uppy.emit('upload-started', file);
 
-        const { hash, path, err } = await ipfs.add({
-            path: '/DocumentPod',
-            content: file.data,
-        }).then(res => res[0]).catch(err => {
-            return { err };
-        });
-        if (err) {
-            this.uppy.log(`[XHRUpload] ${file.id} errored`);
-            this.uppy.emit('upload-error', file, err);
-            return err;
+        if (this.localUpload) {
+            const { hash, path, err } = await this._ipfs.add({
+                path: '/DocumentPod',
+                content: file.data,
+            }).then(res => res[0]).catch(err => {
+                return { err };
+            });
+            if (err) {
+                this.uppy.log(`[XHRUpload] ${file.id} errored`);
+                this.uppy.emit('upload-error', file, err);
+                return err;
+            }
+            const data = Object.assign({}, file, { data: hash, path });
+            this.uppy.setFileState(file.id, data);
+            this.opts.headers = { 'content-type': 'application/json' };
         }
-        const cidFile = Object.assign({}, file, { data: hash, path });
-        this.uppy.setFileState(file.id, cidFile);
 
         return new Promise((resolve, reject) => {
             const data = opts.formData

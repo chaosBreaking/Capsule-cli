@@ -75,7 +75,7 @@ export default class CListItem extends Component {
         return this.children.length > 0 ? <div className={s.CListSubItem}>
             {
                 this.children.map((obj, index) => {
-                    const data = { ...obj }; // 直接使用obj，传递到子组件不是observable
+                    const data = { ...obj }; // 如果直接使用obj，传递到子组件不是observable，所以需要先读取obj
                     return <CListItem activePath={this.store.activePath} path={`${this.path}/`} store={this.props.store} key={index} deep={this.deep <= 4 ? this.deep + 1 : this.deep} title={obj.title} data={data}></CListItem>;
                 })
             }

@@ -65,7 +65,7 @@ export default class Storage extends Component {
 
     render () {
         const { right } = this.getTop();
-        const { sortedFileList, changeInput, isShowInput, inputValue } = this.store;
+        const { changeInput, isShowInput, inputValue } = this.store;
         return (
             <div className={s.container}>
                 <ExtendBar></ExtendBar>
@@ -73,10 +73,10 @@ export default class Storage extends Component {
                     <TopBar right={right} store={this.store} color={'#eee'}></TopBar>
                     <Uppy store={this.store}></Uppy>
                     {isShowInput && <FoderInput inputValue={inputValue} onSubmit={this.createFoderHandler} onCancel={this.hideInput} handleChange={changeInput}></FoderInput>}
-                    { sortedFileList.length > 0
+                    { this.store.currentFilesList.length > 0
                         ? (<>
-                            {this.store.containerType === 'card' && <FileCard files={sortedFileList}></FileCard>}
-                            {this.store.containerType === 'list' && <FileList files={sortedFileList}></FileList>}
+                            {this.store.containerType === 'card' && <FileCard></FileCard>}
+                            {this.store.containerType === 'list' && <FileList></FileList>}
                         </>)
                         : <div className={s.empty}>
                             <div className={s.emptyImg}></div>

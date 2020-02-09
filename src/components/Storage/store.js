@@ -1,4 +1,4 @@
-import { observable, action, computed, autorun } from 'mobx';
+import { observable, action, computed } from 'mobx';
 import CommonStore from '@fundation/CommonStore';
 
 export default class AppStore extends CommonStore {
@@ -9,6 +9,7 @@ export default class AppStore extends CommonStore {
     @observable inputValue = ''
     @observable podData = {};
     @observable activePath = '';
+    @observable currentFoder = '';
 
     constructor (props = {}, getRoot = () => {}) {
         super();
@@ -17,18 +18,31 @@ export default class AppStore extends CommonStore {
         this.fileStack = [];
         this.documentPod = this.rootStore.getPod({ type: 'document' });
         Object.assign(this.podData, this.documentPod.data);
+        this.currentFoder = this.foderList[0];
     }
 
     @computed get foderList () {
-        return Object.keys(this.podData).map(foderTitle => {
+        return Object.keys(this.podData).map((foderTitle, index) => {
             const foder = this.documentPod.data[foderTitle];
             const { data, children } = foder;
             return {
                 title: foderTitle,
                 data,
-                children
+                children,
+                index
             };
         });
+    }
+
+    @computed get currentFilesList () {
+        const target = this.activePath ? this.path2Target(this.activePath) : this.foderList[0];
+        return Object.keys(target.data).reduce((acc, key) => acc.concat(target.data[key]), []);
+    }
+
+    path2Target (path) {
+        return path.split('/').reduce((acc, currPath) => {
+            return acc && acc[currPath] ? acc[currPath] : acc;
+        }, this.podData);
     }
 
     @action.bound
@@ -74,5 +88,11 @@ export default class AppStore extends CommonStore {
     @action.bound
     setActiveFoder = path => {
         this.activePath = path;
+    }
+
+    @action.bound
+    uploadResultHandler = fileArray => {
+        this.documentPod.addFile(this.activePath, fileArray);
+        this.podData = this.documentPod.data;
     }
 }

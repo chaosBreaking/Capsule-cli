@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { observer, inject } from 'mobx-react';
 import s from './FileCard.scss';
 import img from '../../images/file.png';
 import DragSelect from '../DragSelect';
@@ -62,6 +63,9 @@ class CardItem extends Component {
         );
     }
 }
+
+@inject('store')
+@observer
 class FileCard extends DragSelect {
     constructor (props = {}) {
         super(props);
@@ -71,6 +75,10 @@ class FileCard extends DragSelect {
         this.on('mouseDown', e => {
             this.menu && this.menu.clearMenu();
         });
+    }
+
+    get store () {
+        return this.props.store.fileStore;
     }
 
     caculateSelected () {
@@ -118,10 +126,13 @@ class FileCard extends DragSelect {
         this.menu.activateMenu({ x: this.startX, y: this.startY, default: false, option });
     }
 
-    render () {
-        const cardItem = this.props.files.map((file, index) => {
-            return <CardItem key={ index } file={ file } index={ index }></CardItem>;
+    renderItems () {
+        return this.store.currentFilesList.map((file, index) => {
+            return <CardItem key={index} file={file} index={index}></CardItem>;
         });
+    }
+
+    render () {
         return (
             <div className={s.cardContainer}
                 onMouseDown = { e => this.onMouseDown(e) }
@@ -132,7 +143,7 @@ class FileCard extends DragSelect {
             >
                 <ContextMenu onRef = { ref => this.onRef(ref) }></ContextMenu>
                 <div className={s.dragMusk} id="dragMusk"></div>
-                { cardItem }
+                { this.renderItems() }
             </div>
         );
     }
