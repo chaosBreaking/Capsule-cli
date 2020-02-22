@@ -12,7 +12,7 @@
 }
 
 .logo {
-    width: 15rem;
+    width: 10rem;
     position: absolute;
     transform: translateX(-1rem);
 }
@@ -21,4 +21,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.loadingInfo {
+    position: absolute;
+    margin-top: 10rem;
 }

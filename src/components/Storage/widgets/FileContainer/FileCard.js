@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { observer, inject } from 'mobx-react';
 import s from './FileCard.scss';
-import img from '../../images/file.png';
+import cardStyles from './CardItem.scss';
 import DragSelect from '../DragSelect';
 import ContextMenu, { createMenu } from '../ContextMenu';
-import { Grow } from '@material-ui/core';
+import CardItem from './CardItem';
 
 const cardMenu = createMenu([
     {
@@ -40,33 +40,10 @@ const defaultMenu = createMenu([
         name: '属性'
     },
 ]);
-class CardItem extends Component {
-    constructor (props = {}) {
-        super(props);
-    }
-
-    render () {
-        return (
-            <Grow in={true} style={{ transformOrigin: '0 0 0' }} timeout={300}>
-                <div className={s.card} index={this.props.index} id="cardItem">
-                    <div className={s.cardMusk} id='cardMusk'></div>
-                    <div className={s.image}>
-                        <img src={img} alt="cat" width={'100rem'}></img>
-                    </div>
-                    <div className={s.info}>
-                        <span className={s.itemProperty}>
-                            {this.props.file.name}
-                        </span>
-                    </div>
-                </div>
-            </Grow>
-        );
-    }
-}
 
 @inject('store')
 @observer
-class FileCard extends DragSelect {
+export default class FileCard extends DragSelect {
     constructor (props = {}) {
         super(props);
         this.debounceBarX = 200;
@@ -83,7 +60,7 @@ class FileCard extends DragSelect {
 
     caculateSelected () {
         const { top: borderTop, bottom: borderBottom, left: borderLeft, right: borderRight } = this.target.getBoundingClientRect();
-        const items = document.getElementsByClassName(s.card);
+        const items = document.getElementsByClassName(cardStyles.card);
         // eslint-disable-next-line no-unused-vars
         for (const item of items) {
             const position = item.getBoundingClientRect();
@@ -93,19 +70,19 @@ class FileCard extends DragSelect {
                 position.left + 100 > borderLeft &&
                 position.right - 100 < borderRight
             ) {
-                item.className += ' ' + s.active;
+                item.className += ' ' + cardStyles.active;
                 const itemIndex = item.getAttribute('index');
                 !this.selectedArr.includes(itemIndex) && this.selectedArr.push(itemIndex);
             } else {
-                item.className = s.card;
+                item.className = cardStyles.card;
             }
         }
     }
 
     clearSelected () {
-        const items = document.getElementsByClassName(s.card);
+        const items = document.getElementsByClassName(cardStyles.card);
         this.selectedArr.forEach(index => {
-            items[index].className = s.card;
+            items[index].className = cardStyles.card;
         });
         this.selectedArr = [];
     }
@@ -148,5 +125,3 @@ class FileCard extends DragSelect {
         );
     }
 }
-
-export default FileCard;

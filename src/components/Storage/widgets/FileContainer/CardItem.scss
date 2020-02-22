@@ -1,0 +1,77 @@
+.card {
+    background: #fff;
+    position: relative;
+    border-radius: 0.5rem;
+    flex: 0 1 auto;
+    margin: 1rem 1rem 0 1rem;
+    padding: 1rem 1rem 0 1rem;
+    width: 12rem;
+    height: 14rem;
+    max-width: 12rem;
+    min-width: 12rem;
+    max-height: 14rem;
+    min-height: 14rem;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    -ms-border-radius: 0.5rem;
+    -o-border-radius: 0.5rem;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
+.card:hover {
+    background: rgba(196, 196, 196, 0.2);
+}
+.card:active {
+    background: rgba(196, 196, 196, 0.2);
+}
+.cardMusk {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.thumb {
+    width: 100%;
+    height: 11rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.img {
+    width: 10.5rem;
+    height: 10.5rem;
+}
+
+.info {
+    position: absolute;
+    bottom: .5rem;
+    .itemProperty {
+        display: block;
+        font-size: 1rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        white-space: nowrap;
+        max-width: 10rem;
+        min-width: 10rem;
+    }
+}
+.spacer {
+    margin-top: 1rem;
+}
+.dragMusk {
+    position: absolute;
+    background-color: rgb(162, 162, 162);
+    opacity:0.3;
+    border:1px dashed #d9d9d9;
+    pointer-events: none;
+    z-index: 11116;
+}
+.active {
+    background: #eee;
+}

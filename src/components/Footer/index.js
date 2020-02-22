@@ -5,7 +5,9 @@ export default class Footer extends Component {
     render () {
         return (
             <div className={s.footer}>
-                capsule cooporation
+                <span>
+                    © Capsule 2020
+                </span>
             </div>
         );
     }

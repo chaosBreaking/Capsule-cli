@@ -26,9 +26,9 @@ export default class Loader extends Component {
             <div className={s.container}>
                 <div className={s.loadBar}>
                     <img className={s.logo} src={logo}></img>
-                    {isLoading && <CircularProgress size={'22rem'} thickness={1}/>}
+                    {isLoading && <CircularProgress size={'16rem'} thickness={1}/>}
                 </div>
-                <div>
+                <div className={s.loadingInfo}>
                     <h2>{loadingInfo}</h2>
                 </div>
             </div>

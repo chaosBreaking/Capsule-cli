@@ -8,6 +8,7 @@ import { Uppy } from './widgets/Uploader';
 import ExtendBar from '@components/ExtendBar';
 import FoderInput from './widgets/FoderInput';
 import { FileCard, FileList } from './widgets/FileContainer';
+import Viewer from './widgets/FileContainer/Viewer';
 
 @inject('store')
 @observer
@@ -84,6 +85,7 @@ export default class Storage extends Component {
                         </div>
                     }
                 </div>
+                <Viewer></Viewer>
             </div>
         );
     }

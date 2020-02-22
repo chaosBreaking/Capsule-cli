@@ -65,8 +65,8 @@ class FileList extends DragSelect {
         });
     }
 
-    get filesList () {
-        return this.props.store.currentFilesList;
+    get store () {
+        return this.props.store.fileStore;
     }
 
     caculateSelected () {
@@ -109,7 +109,7 @@ class FileList extends DragSelect {
     }
 
     renderItems () {
-        return this.filesList.map((file, index) => {
+        return this.store.currentFilesList.map((file, index) => {
             return <ListItem key={index} file={file} index={index}></ListItem>;
         });
     }

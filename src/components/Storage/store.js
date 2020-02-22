@@ -1,5 +1,6 @@
 import { observable, action, computed } from 'mobx';
 import CommonStore from '@fundation/CommonStore';
+import { fetchDataByCID } from '@service/urlMap';
 
 export default class AppStore extends CommonStore {
     @observable containerType = 'card' // 'card' || 'list'
@@ -10,6 +11,8 @@ export default class AppStore extends CommonStore {
     @observable podData = {};
     @observable activePath = '';
     @observable currentFoder = '';
+    @observable isViewerShow = false;
+    @observable viewerData = {};
 
     constructor (props = {}, getRoot = () => {}) {
         super();
@@ -19,6 +22,10 @@ export default class AppStore extends CommonStore {
         this.documentPod = this.rootStore.getPod({ type: 'document' });
         Object.assign(this.podData, this.documentPod.data);
         this.currentFoder = this.foderList[0];
+    }
+
+    get rootStore () {
+        return this.getRoot();
     }
 
     @computed get foderList () {
@@ -43,6 +50,21 @@ export default class AppStore extends CommonStore {
         return path.split('/').reduce((acc, currPath) => {
             return acc && acc[currPath] ? acc[currPath] : acc;
         }, this.podData);
+    }
+
+    @action.bound
+    showViewer = data => {
+        const { hash } = data;
+        this.viewerData = {
+            url: 'http://localhost:8080/ipfs/' + hash,
+            ...data
+        };
+        this.isViewerShow = true;
+    }
+
+    @action.bound
+    hideViewer = () => {
+        this.isViewerShow = false;
     }
 
     @action.bound
@@ -94,5 +116,9 @@ export default class AppStore extends CommonStore {
     uploadResultHandler = fileArray => {
         this.documentPod.addFile(this.activePath, fileArray);
         this.podData = this.documentPod.data;
+    }
+
+    async requestDataByCID (hash) {
+        this.request(fetchDataByCID, 'localhost:8080/ipfs/' + hash);
     }
 }

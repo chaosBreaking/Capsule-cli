@@ -14,3 +14,4 @@ export const fetchPod = (provider, url, params) => provider.post(getUrl(url, '/p
 export const fetchData = (provider, url, params) => provider.post(getUrl(url, '/pod/query'), params);
 export const registPod = (provider, url, params) => provider.post(getUrl(url, '/pod/regist'), params);
 export const syncPod = (provider, url, params) => provider.post(getUrl(url, '/pod/update'), params);
+export const fetchDataByCID = (provider, url, params) => provider.post(url, params);
